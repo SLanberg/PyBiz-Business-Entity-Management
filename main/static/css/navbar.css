@@ -1,0 +1,48 @@
+/* Navbar styling */
+.navbar {
+    background-color: black;
+    color: white;
+    padding: 10px 0; /* Adjust padding as needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the navbar is above other content */
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar-logo a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: white;
+    margin-left: 20px; /* Adjust margin for spacing between links */
+}
+
+/* Optional: Hover effect for links */
+.navbar-links a:hover {
+    text-decoration: underline;
+}
+
+#navbar-logo {
+    width: 275px;
+    height: 75px;
+}

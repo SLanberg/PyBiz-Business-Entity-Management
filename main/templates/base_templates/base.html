@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Company Search{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+</head>
+<body>
+
+    {% include 'base_templates/navbar.html' %}
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <footer>
+        {% include 'base_templates/footer.html' %}
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% block extra_js %}{% endblock %}"></script>
+</body>
+</html>
