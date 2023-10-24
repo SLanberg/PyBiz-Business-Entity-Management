@@ -1,6 +1,7 @@
 from django.contrib import admin
-from pages.models import *
+from .models import LimitedLiabilityCompany
 
-# Register your models here.
+class LimitedLiabilityCompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'establishment_date', 'total_capital_size', 'registration_code')
 
-admin.site.register(LimitedLiabilityCompany)
+admin.site.register(LimitedLiabilityCompany, LimitedLiabilityCompanyAdmin)

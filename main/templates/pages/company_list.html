@@ -1,0 +1,26 @@
+<title>Company List</title>
+
+{% extends "base_templates/base.html" %}
+
+{% load static %}
+
+{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/company_list.css' %}">{% endblock %}
+
+
+{% block content %}
+    <h1>Company List</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Search" value="{{ search_query }}">
+        <button type="submit">Search</button>
+    </form>
+    
+    <div class="search-results">
+        {% for company in companies %}
+            <div class="search-result">
+                <h2>{{ company.name }}</h2>
+                <p class="info">{{ company.establishment_date }} - Total Capital: ${{ company.total_capital_size }} - Registration Code: {{ company.registration_code }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

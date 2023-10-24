@@ -5,3 +5,7 @@ class LimitedLiabilityCompany(models.Model):
     registration_code = models.CharField(max_length=7)
     establishment_date = models.DateField()
     total_capital_size = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name  # You can customize this to display any relevant information
+

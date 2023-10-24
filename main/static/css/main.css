@@ -1,11 +1,11 @@
-body {
+html body {
     background-color: var(--primary-bg-color);
 }
 
 #search-container {
     position: relative;
     text-align: center;
-    margin-top: 20%;
+    margin-top: 40px;
 }
 
 #search-form {
