@@ -33,3 +33,14 @@ html body {
     font-size: 16px;
     cursor: pointer;
 }
+
+#quote-section {
+    background-color: rgba(0, 0, 0, 0.5); /* 0.5 represents 50% transparency */
+    padding: 20px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#slogan {
+    color: white;
+}

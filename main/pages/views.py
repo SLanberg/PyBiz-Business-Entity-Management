@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView
 from .models import LimitedLiabilityCompany
 from .forms import LimitedLiabilityCompanyForm
 
+from django.db.models import Q
+
 def home(request):
     return render(request, 'home.html')
 
@@ -16,13 +18,33 @@ class CompanyCreateView(CreateView):
 def company_list(request):
     search_query = request.GET.get('q', '')  # Get the search query from the URL
 
-    # Implement your search logic here using the search_query
-    # For example, you can filter the Company model based on the search_query
-    companies = LimitedLiabilityCompany.objects.filter(name__icontains=search_query)
+    if not search_query:
+        # If the query is empty, set a message to be displayed in the template
+        empty_query_message = "Please enter data to search."
+        companies = []
+    else:
+        # Split the search query into words to search across multiple fields
+        search_terms = search_query.split()
+
+        # Create a Q object for searching across multiple fields
+        search_filter = Q()
+
+        for term in search_terms:
+            # Search company name or registration code
+            search_filter |= Q(name__icontains=term) | Q(registration_code__icontains=term)
+
+            # Search shareholder name or shareholder code
+            # search_filter |= Q(shareholders__name__icontains=term) | Q(shareholders__code__icontains=term)
+
+        # Use the Q object to filter the LimitedLiabilityCompany model
+        companies = LimitedLiabilityCompany.objects.filter(search_filter).distinct()
+
+        empty_query_message = None
 
     context = {
         'search_query': search_query,
         'companies': companies,
+        'empty_query_message': empty_query_message,
     }
 
     return render(request, 'pages/company_list.html', context)

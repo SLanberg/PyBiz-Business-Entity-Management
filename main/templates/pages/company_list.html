@@ -8,13 +8,14 @@
 
 
 {% block content %}
-    <h1>Company List</h1>
-    <form method="get">
-        <input type="text" name="q" placeholder="Search" value="{{ search_query }}">
-        <button type="submit">Search</button>
-    </form>
-    
+
     <div class="search-results">
+        <form method="get">
+            <input type="text" name="q" placeholder="Search" value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
+    
+    
         {% for company in companies %}
             <div class="search-result">
                 <h2>{{ company.name }}</h2>
