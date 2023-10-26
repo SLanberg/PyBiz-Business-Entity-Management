@@ -6,19 +6,41 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
 
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
     <script type="text/javascript">
         $(document).ready(function () {
-        $("#add-shareholder").click(function () {
-            var form_idx = $('#id_form-TOTAL_FORMS').val();
-            var newForm = $('#empty-form').html().replace(/__prefix__/g, form_idx);
-            $('#shareholder-forms').append(newForm);
-            $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+            var formset = '{{ formset.prefix }}';  // Get the formset prefix
+
+            function addRemoveButton(container) {
+                container.append('<button style="margin: 20px 0 20px 0; display: block;" type="button" class="remove-form">Remove</button>');
+            }
+
+            $("#add-shareholder").click(function () {
+                var form_idx = $('#id_' + formset + '-TOTAL_FORMS').val();
+                var newForm = $('#empty-form').html().replace(/__prefix__/g, form_idx);
+                var formContainer = $('<div class="form-container"></div>');
+                formContainer.append(newForm);
+                $('#shareholder-forms').append(formContainer);
+
+                // Conditionally add the "Remove" button
+                if (form_idx > 0) {
+                    addRemoveButton(formContainer);
+                }
+
+                $('#id_' + formset + '-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+            });
+
+            $(document).on('click', '.remove-form', function() {
+                $(this).closest('.form-container').remove();
+                updateFormCount();
+            });
+
+            function updateFormCount() {
+                const forms = $('.form-container');
+                $('#id_' + formset + '-TOTAL_FORMS').val(forms.length);
+            }
         });
-    });
     </script>
-    
 {% endblock %}
 
 {% block content %}
@@ -30,13 +52,22 @@
 
         <!-- Shareholder forms -->
         <div id="shareholder-forms">
+            <label for="founder_status">Status of the Shareholder:</label>
+            <select id="founder_status" name="founder_status">
+                <option value="Natural" selected>Natural</option>
+                <option value="Legal">Legal</option>
+            </select>
+
             {% for form in formset.forms %}
-                {{ form.as_table }}
-            {% endfor %}
+    <div class="form-container">
+        {{ form.as_table }}
+    </div>
+{% endfor %}
+
         </div>
 
-        <button type="button" id="add-shareholder">Add more</button>
-        <button type="submit">Submit</button>
+        <button type="button" id="add-shareholder">Add More Shareholders</button>
+        <button style="margin:20px 0 20px 0; display: block;" type="submit">Submit</button>
     </form>
 
     <!-- Empty shareholder form template -->
