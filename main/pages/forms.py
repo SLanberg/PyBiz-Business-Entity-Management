@@ -1,5 +1,21 @@
 from django import forms
-from .models import LimitedLiabilityCompany
+from .models import LimitedLiabilityCompany, Shareholder
+from django.forms import inlineformset_factory
+
+
+class ShareholderForm(forms.ModelForm):
+    class Meta:
+        model = Shareholder
+        fields = ['natural_person', 'legal_entity', 'share_count', 'is_founder']
+
+
+ShareholderFormSet = inlineformset_factory(
+    LimitedLiabilityCompany,  # Parent model
+    Shareholder,              # Child model
+    form=ShareholderForm,
+    extra=1,                  # Number of empty forms to display
+)
+
 
 class LimitedLiabilityCompanyForm(forms.ModelForm):
     class Meta:
