@@ -1,22 +1,22 @@
 from django.core.management.base import BaseCommand
-from pages.models import LimitedLiabilityCompany
+from django.contrib.auth.models import User
+from accounts.models import LegalEntity
 from faker import Faker
-from random import randint
-from datetime import date, timedelta
+import random
 
 class Command(BaseCommand):
-    help = 'Populate the LimitedLiabilityCompany model with dummy data'
+    help = 'Populate LegalEntity and create admin user'
 
     def handle(self, *args, **options):
         fake = Faker()
 
-        for _ in range(100):  # Change 100 to the desired number of records
-            llc = LimitedLiabilityCompany(
-                name=fake.company(),
-                registration_code=fake.unique.random_number(digits=7),
-                establishment_date=fake.date_between(start_date='-30y', end_date='today'),
-                total_capital_size=randint(1000, 1000000)
-            )
-            llc.save()
+        # Create admin user
+        User.objects.create_superuser('admin', 'admin@example.com', 'admin')
 
-        self.stdout.write(self.style.SUCCESS('Limited Liability Companies have been populated successfully. ✅'))
+        # Populate LegalEntity
+        for _ in range(10):  # Adjust the number of entities as needed
+            name = fake.company()
+            registration_code = ''.join(random.choices('0123456789', k=11))
+            LegalEntity.objects.create(name=name, registration_code=registration_code)
+
+        self.stdout.write(self.style.SUCCESS('Successfully populated LegalEntity and created admin user.'))

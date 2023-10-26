@@ -9,7 +9,6 @@ class ShareholderForm(forms.ModelForm):
         fields = ['natural_person', 'legal_entity', 'share_count', 'is_founder']
 
 
-
 ShareholderFormSet = inlineformset_factory(
     LimitedLiabilityCompany,  # Parent model
     Shareholder,              # Child model
@@ -27,14 +26,3 @@ class LimitedLiabilityCompanyForm(forms.ModelForm):
         widgets = {
             'establishment_date': forms.widgets.DateInput(attrs={'type': 'date'})
         }
-
-
-class CompanySearchForm(forms.Form):
-    q = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Search for companies...'}))
-
-    def clean_q(self):
-        q = self.cleaned_data.get('q')
-        if not q or q.strip() == "":
-            raise forms.ValidationError("Please enter data to search.")
-        return q
-    

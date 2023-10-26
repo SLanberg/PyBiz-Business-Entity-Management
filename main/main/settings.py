@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'main',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Added manually
-    'pages',
+    'main',
+    'accounts',
+    'search',
 ]
 
 MIDDLEWARE = [

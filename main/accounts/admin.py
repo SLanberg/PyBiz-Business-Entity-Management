@@ -14,7 +14,17 @@ class LegalEntityAdmin(admin.ModelAdmin):
     list_display = ('name', 'registration_code')
 
 
+class ShareholderAdmin(admin.ModelAdmin):
+    list_display = ('natural_person', 'display_company_info', 'legal_entity', 'share_count', 'is_founder')
+
+    def display_company_info(self, obj):
+        return obj.company.name  # Adjust this based on your 'company' model's structure
+
+    display_company_info.short_description = 'Company Info'
+
+
 
 admin.site.register(LimitedLiabilityCompany, LimitedLiabilityCompanyAdmin)
 admin.site.register(NaturalPerson, NaturalPersonAdmin)
 admin.site.register(LegalEntity, LegalEntityAdmin)
+admin.site.register(Shareholder, ShareholderAdmin)
