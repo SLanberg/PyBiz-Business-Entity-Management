@@ -9,11 +9,13 @@ class ShareholderForm(forms.ModelForm):
         fields = ['natural_person', 'legal_entity', 'share_count', 'is_founder']
 
 
+
 ShareholderFormSet = inlineformset_factory(
     LimitedLiabilityCompany,  # Parent model
     Shareholder,              # Child model
     form=ShareholderForm,
     extra=1,                  # Number of empty forms to display
+    can_delete = False,
 )
 
 
@@ -35,3 +37,4 @@ class CompanySearchForm(forms.Form):
         if not q or q.strip() == "":
             raise forms.ValidationError("Please enter data to search.")
         return q
+    

@@ -1,11 +1,25 @@
 {% extends "base_templates/base.html" %}
-
 {% load static %}
 
 {% block title %}Establish a Limited Liability Company{% endblock %}
 
-{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
 
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $("#add-shareholder").click(function () {
+            var form_idx = $('#id_form-TOTAL_FORMS').val();
+            var newForm = $('#empty-form').html().replace(/__prefix__/g, form_idx);
+            $('#shareholder-forms').append(newForm);
+            $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+        });
+    });
+    </script>
+    
+{% endblock %}
 
 {% block content %}
     &nbsp;
@@ -13,14 +27,20 @@
         {% csrf_token %}
         {{ form.as_p }}
         {{ formset.management_form }}
-    
-        <!-- Shareholder forms -->
-        {% for form in formset.forms %}
-            {{ form.as_table }}
-        {% endfor %}
-    
-        <input type="submit" value="Save">
-    </form>
-    
-{% endblock %}
 
+        <!-- Shareholder forms -->
+        <div id="shareholder-forms">
+            {% for form in formset.forms %}
+                {{ form.as_table }}
+            {% endfor %}
+        </div>
+
+        <button type="button" id="add-shareholder">Add more</button>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Empty shareholder form template -->
+    <div id="empty-form" style="display: none;">
+        {{ formset.empty_form.as_table }}
+    </div>
+{% endblock %}
