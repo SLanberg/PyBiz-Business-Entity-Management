@@ -6,41 +6,8 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var formset = '{{ formset.prefix }}';  // Get the formset prefix
-
-            function addRemoveButton(container) {
-                container.append('<button style="margin: 20px 0 20px 0; display: block;" type="button" class="remove-form">Remove</button>');
-            }
-
-            $("#add-shareholder").click(function () {
-                var form_idx = $('#id_' + formset + '-TOTAL_FORMS').val();
-                var newForm = $('#empty-form').html().replace(/__prefix__/g, form_idx);
-                var formContainer = $('<div class="form-container"></div>');
-                formContainer.append(newForm);
-                $('#shareholder-forms').append(formContainer);
-
-                // Conditionally add the "Remove" button
-                if (form_idx > 0) {
-                    addRemoveButton(formContainer);
-                }
-
-                $('#id_' + formset + '-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-            });
-
-            $(document).on('click', '.remove-form', function() {
-                $(this).closest('.form-container').remove();
-                updateFormCount();
-            });
-
-            function updateFormCount() {
-                const forms = $('.form-container');
-                $('#id_' + formset + '-TOTAL_FORMS').val(forms.length);
-            }
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/establish-company.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -51,7 +18,7 @@
         {{ formset.management_form }}
 
         <!-- Shareholder forms -->
-        <div id="shareholder-forms">
+        <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
             <label for="founder_status">Status of the Shareholder:</label>
             <select id="founder_status" name="founder_status">
                 <option value="Natural" selected>Natural</option>
