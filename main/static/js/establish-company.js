@@ -1,30 +1,33 @@
 $(document).ready(function () {
-    var formsetPrefix = $('#shareholder-forms').data('prefix'); // Get the formset prefix from a data attribute
+  var counter = 0;
 
-    function addRemoveButton(container) {
-        container.append('<button style="margin: 20px 0 20px 0; display: block;" type="button" class="remove-form">Remove</button>');
-    }
+  function addRemoveButton(container, formIdx) {
+    var removeButton = $(
+      '<button style="margin: 20px 0 20px 0; display: block; background-color: #8B0000;" type="button" class="remove-form">Remove</button>'
+    );
+    removeButton.data("form-index", formIdx); // Store the form index in the button's data
+    container.append(removeButton);
+  }
 
-    $("#add-shareholder").click(function () {
-        var formIdx = $('#id_' + formsetPrefix + '-TOTAL_FORMS').val();
-        var newForm = $('#empty-form').html().replace(/__prefix__/g, formIdx);
-        var formContainer = $('<div class="form-container"></div>');
-        formContainer.append(newForm);
-        $('#shareholder-forms').append(formContainer);
-        
-        // Add the "Remove" button for the new form
-        addRemoveButton(formContainer);
+  $("#add-shareholder").click(function () {
+    counter++;
 
-        $('#id_' + formsetPrefix + '-TOTAL_FORMS').val(parseInt(formIdx) + 1);
-    });
+    var newForm = $("#empty-form")
+      .html()
+      .replace(/__prefix__/, counter);
+    var formContainer = $('<div class="form-container"></div>');
+    formContainer.append(newForm);
 
-    $(document).on('click', '.remove-form', function () {
-        $(this).closest('.form-container').remove();
-        updateFormCount();
-    });
+    // Add the "Remove" button for the new form
+    addRemoveButton(formContainer, counter);
 
-    function updateFormCount() {
-        const forms = $('.form-container');
-        $('#id_' + formsetPrefix + '-TOTAL_FORMS').val(forms.length);
-    }
+    // Append the <hr> after the new form container
+    formContainer.append("<hr>");
+
+    $("#shareholder-forms").append(formContainer);
+  });
+
+  $(document).on("click", ".remove-form", function () {
+    $(this).closest(".form-container").remove();
+  });
 });

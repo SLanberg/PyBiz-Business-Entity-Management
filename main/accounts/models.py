@@ -24,4 +24,4 @@ class Shareholder(models.Model):
     legal_entity = models.ForeignKey(LegalEntity, null=True, blank=True, on_delete=models.CASCADE)
     company = models.ForeignKey(LimitedLiabilityCompany, null=True, blank=True, on_delete=models.CASCADE)
     share_count = models.PositiveIntegerField()
-    is_founder = models.BooleanField()
+    is_founder = models.BooleanField(default=True)
