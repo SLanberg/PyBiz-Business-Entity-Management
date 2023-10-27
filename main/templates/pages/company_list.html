@@ -21,11 +21,12 @@
         </form>
     
         {% for company in companies %}
-            <div class="search-result">
-                <h2>{{ company.name }}</h2>
-                <p class="info">{{ company.establishment_date }} - Total Capital: ${{ company.total_capital_size }} - Registration Code: {{ company.registration_code }}</p>
-            </div>
-        {% endfor %}
+    <div class="search-result">
+        <h2><a href="{% url 'company_detail' company_id=company.id %}">{{ company.name }}</a></h2>
+        <p class="info">{{ company.establishment_date }} - Total Capital: ${{ company.total_capital_size }} - Registration Code: {{ company.registration_code }}</p>
+    </div>
+{% endfor %}
+
     </div>
 </div>
 {% endblock %}
