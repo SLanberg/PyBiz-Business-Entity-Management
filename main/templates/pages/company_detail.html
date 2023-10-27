@@ -3,12 +3,18 @@
 
 {% block title %}Establish a Limited Liability Company{% endblock %}
 
-{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/company_detail.css' %}">{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/company_detail.css' %}">{% endblock %}
 
 {% block content %}
 
-<div id="section">    
-    <h1>{{ company.name }}</h1>
+
+<div id="section">
+    <div class="flex-container">
+        <h1>{{ company.name }}</h1>
+        <img class="image" src="{% static 'media/edit.png' %}" alt="Edit">
+    </div>
+
     <p>Registration Code: {{ company.registration_code }}</p>
     <p>Establishment Date: {{ company.establishment_date }}</p>
     <p>Total Capital Size: {{ company.total_capital_size }}</p>

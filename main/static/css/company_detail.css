@@ -5,3 +5,14 @@
     margin: 57px auto;
     padding: 30px; /* Added 30px padding inside the section */
 }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -20px;
+}
+
+.image {
+    height: 30px;
+}
