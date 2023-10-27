@@ -6,7 +6,7 @@ from django.forms import inlineformset_factory
 class ShareholderForm(forms.ModelForm):
     class Meta:
         model = Shareholder
-        fields = ['natural_person', 'legal_entity', 'share_count', 'is_founder']
+        fields = ['natural_person', 'legal_entity', 'share_count',]
 
 
 ShareholderFormSet = inlineformset_factory(

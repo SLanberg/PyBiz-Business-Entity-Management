@@ -15,16 +15,18 @@ $(document).ready(function () {
         // Add the "Remove" button for the new form
         addRemoveButton(formContainer);
 
+        formContainer.append('<hr>');
+
         $('#id_' + formsetPrefix + '-TOTAL_FORMS').val(parseInt(formIdx) + 1);
     });
 
     $(document).on('click', '.remove-form', function () {
         $(this).closest('.form-container').remove();
-        updateFormCount();
+        // updateFormCount();
     });
 
-    function updateFormCount() {
-        const forms = $('.form-container');
-        $('#id_' + formsetPrefix + '-TOTAL_FORMS').val(forms.length);
-    }
+    // function updateFormCount() {
+    //     const forms = $('.form-container');
+    //     $('#id_' + formsetPrefix + '-TOTAL_FORMS').val(forms.length);
+    // }
 });

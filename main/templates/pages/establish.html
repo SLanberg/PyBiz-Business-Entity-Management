@@ -4,41 +4,44 @@
 {% block title %}Establish a Limited Liability Company{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/establish-company.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/establish-company.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-    &nbsp;
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {{ formset.management_form }}
+&nbsp;
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ formset.management_form }}
 
-        <!-- Shareholder forms -->
-        <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
-            <label for="founder_status">Status of the Shareholder:</label>
+    <!-- Shareholder forms -->
+    <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
+        <!-- <label for="founder_status">Status of the Shareholder:</label>
             <select id="founder_status" name="founder_status">
                 <option value="Natural" selected>Natural</option>
                 <option value="Legal">Legal</option>
-            </select>
+            </select> -->
 
-            {% for form in formset.forms %}
-    <div class="form-container">
-        {{ form.as_table }}
-    </div>
-{% endfor %}
-
+        {% for form in formset.forms %}
+        <div class="form-container">
+            {{ form.as_table }}
         </div>
 
-        <button type="button" id="add-shareholder">Add More Shareholders</button>
-        <button style="margin:20px 0 20px 0; display: block;" type="submit">Submit</button>
-    </form>
+        <hr>
+        {% endfor %}
 
-    <!-- Empty shareholder form template -->
-    <div id="empty-form" style="display: none;">
-        {{ formset.empty_form.as_table }}
     </div>
+
+
+    <button type="button" id="add-shareholder">Add More Shareholders</button>
+    <button style="margin:20px 0 20px 0; display: block;" type="submit">Submit</button>
+</form>
+
+<!-- Empty shareholder form template -->
+<div id="empty-form" style="display: none;">
+    {{ formset.empty_form.as_table }}
+</div>
 {% endblock %}
