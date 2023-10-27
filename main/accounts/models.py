@@ -6,10 +6,15 @@ class NaturalPerson(models.Model):
     last_name = models.CharField(max_length=100)
     id_code = models.CharField(max_length=11)
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name + " | " +self.id_code
 
 class LegalEntity(models.Model):
     name = models.CharField(max_length=100)
     registration_code = models.CharField(max_length=11)
+
+    def __str__(self):
+        return self.name + " | " + self.registration_code
 
 
 class LimitedLiabilityCompany(models.Model):
