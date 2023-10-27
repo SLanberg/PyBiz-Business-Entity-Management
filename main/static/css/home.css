@@ -1,6 +1,6 @@
 body {
     background-color: var(--primary-bg-color);
-    background-image: url("/static/media/home/background.png");
+    /* background-image: url("/static/media/home/background.png"); */
     background-size: cover;
     font-family: 'EurostileExtended', sans-serif; /* Apply the custom font to the entire application */
 }

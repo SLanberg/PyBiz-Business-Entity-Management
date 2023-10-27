@@ -12,6 +12,8 @@
     align-items: center;
     justify-content: space-between;
     font-family: 'EurostileExtended', sans-serif; /* Apply the custom font to the entire navbar */
+    position: absolute;
+    top: 5px;
 }
 
 #logo-section {
