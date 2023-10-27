@@ -23,10 +23,18 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="date"],
-input[type="number"],
+input[type="number"]
+{
+    width: 95%; /* Set the width to 100% to take up the full width of the container */
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+
 select {
-    width: 100%; /* Set the width to 100% to take up the full width of the container */
-    padding: 10px 0 10px 0;
+    width: 98%; /* Set the width to 100% to take up the full width of the container */
+    padding: 10px;
     border: 1px solid #000;
     border-radius: 5px;
 }

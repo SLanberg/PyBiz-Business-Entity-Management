@@ -16,7 +16,19 @@
 &nbsp;
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        <tr>
+          <td>{{ field.label_tag }}</td>
+          <td>{{ field }}
+          <p style="margin: 10px;">{{ field.errors }}</p>
+          </td>
+        </tr>
+        <br>
+        {% endfor %}
+
+    
     {{ formset.management_form }}
 
     <!-- Shareholder forms -->

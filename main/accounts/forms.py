@@ -24,5 +24,5 @@ class LimitedLiabilityCompanyForm(forms.ModelForm):
         fields = ['name', 'registration_code', 'establishment_date', 'total_capital_size']
 
         widgets = {
-            'establishment_date': forms.widgets.DateInput(attrs={'type': 'date'})
+            'establishment_date': forms.widgets.DateInput(attrs={'type': 'date'}, )
         }
