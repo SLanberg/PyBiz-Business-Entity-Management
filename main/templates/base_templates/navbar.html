@@ -1,6 +1,8 @@
 {% load static %}
 
-{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+{% endblock %}
 
 <div class="container">
     <div class="navbar">
@@ -10,8 +12,9 @@
             <img src="{% static 'media/navbar/Umbrella_Corporation_name.png' %}" alt="Your Image Description">
         </a>
         <div id="options-section">
-            <p><a href="{% url 'home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></p>         
-            <p><a href="{% url 'establish_company' %}" class="nav-link {% if request.path == '/establish' %}active{% endif %}">Establish</a></p>         
+            <p><a href="{% url 'home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></p>
+            <p><a href="{% url 'establish_company' %}"
+                    class="nav-link {% if request.path == '/establish' %}active{% endif %}">Establish</a></p>
 
             <img src="{% static 'media/navbar/search.png' %}" alt="Your Image Description">
             <div id="separator"></div>

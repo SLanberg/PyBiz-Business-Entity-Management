@@ -24,4 +24,3 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('search.urls'))
 ]
-

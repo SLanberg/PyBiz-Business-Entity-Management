@@ -12,8 +12,9 @@ def validate_integer(value):
 def validate_id_code_length(value):
     if len(value) != 11:
         raise ValidationError("id_code must have exactly 11 characters")
-    
+
 
 def establishment_date_validator(value):
-        if value > timezone.now().date():
-            raise ValidationError("Establishment date cannot exceed the current date")
+    if value > timezone.now().date():
+        raise ValidationError(
+            "Establishment date cannot exceed the current date")

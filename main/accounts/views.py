@@ -14,7 +14,8 @@ def company_detail(request, company_id):
 def create_limited_liability_company(request):
     if request.method == 'POST':
         form = LimitedLiabilityCompanyForm(request.POST)
-        formset = ShareholderFormSet(request.POST, instance=LimitedLiabilityCompany())
+        formset = ShareholderFormSet(
+            request.POST, instance=LimitedLiabilityCompany())
 
         if form.is_valid() and formset.is_valid():
             # Save the LimitedLiabilityCompany
@@ -29,24 +30,24 @@ def create_limited_liability_company(request):
 
             return redirect('company_detail', company_id=limited_liability_company.id)
 
-
     else:
         form = LimitedLiabilityCompanyForm()
         formset = ShareholderFormSet(instance=LimitedLiabilityCompany())
 
-    return render(request, 'pages/establish.html', {'form': form, 'formset': formset})
+    return render(request, 'pages/establish_company.html', {'form': form, 'formset': formset})
 
 
 def edit_company(request, company_id):
     company = get_object_or_404(LimitedLiabilityCompany, pk=company_id)
-    
+
     if request.method == 'POST':
         form = CompanyEditForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
-            return redirect('company_data_view')  # Redirect to company data view or any other desired view
+            # Redirect to company data view or any other desired view
+            return redirect('company_data_view')
 
     else:
         form = CompanyEditForm(instance=company)
-    
+
     return render(request, 'pages/increase_capital.html', {'form': form, 'company': company})

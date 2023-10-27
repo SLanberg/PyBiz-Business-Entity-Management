@@ -9,13 +9,13 @@
 
 {% block content %}
 <div id="section">
-    <h1>Edit Company {{ company.name }}</h1>
+  <h1>Edit Company {{ company.name }}</h1>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
   </form>
 
-   
+
 </div>
 {% endblock %}

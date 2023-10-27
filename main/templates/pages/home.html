@@ -1,0 +1,28 @@
+{% extends "base_templates/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<script src="{% static 'js/home.js' %}"></script>
+<script src="{% static 'js/particles/particles.js' %}"></script>
+<div id="particles-js"></div>
+{% endblock %}
+
+{% block content %}
+<div id="slogan-container">
+    <img src="{% static 'media/home/future_is_here.png' %}" alt="Your Image Description">
+
+    <div id="search-container">
+        <div>
+            <input type="text" class="wide-input" id="search-input" name="q" placeholder="Search for companies...">
+        </div>
+
+        <div class="buttons-section">
+            <button type="button" class="button" id="search-button" onclick="searchCompanies()">Company Info Search</button>
+            <a href="{% url 'establish_company' %}"><button type="submit" class="button" id="establish-button">Establish Company</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

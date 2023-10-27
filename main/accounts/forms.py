@@ -14,14 +14,15 @@ ShareholderFormSet = inlineformset_factory(
     Shareholder,              # Child model
     form=ShareholderForm,
     extra=1,                  # Number of empty forms to display
-    can_delete = False,
+    can_delete=False,
 )
 
 
 class LimitedLiabilityCompanyForm(forms.ModelForm):
     class Meta:
         model = LimitedLiabilityCompany
-        fields = ['name', 'registration_code', 'establishment_date', 'total_capital_size']
+        fields = ['name', 'registration_code',
+                  'establishment_date', 'total_capital_size']
 
         widgets = {
             'establishment_date': forms.widgets.DateInput(attrs={'type': 'date'}, )
@@ -31,7 +32,8 @@ class LimitedLiabilityCompanyForm(forms.ModelForm):
 class CompanyEditForm(forms.ModelForm):
     class Meta:
         model = LimitedLiabilityCompany
-        fields = ['name', 'registration_code', 'establishment_date', 'total_capital_size']
+        fields = ['name', 'registration_code',
+                  'establishment_date', 'total_capital_size']
 
     def __init__(self, *args, **kwargs):
         super(CompanyEditForm, self).__init__(*args, **kwargs)

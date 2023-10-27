@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     {% load static %}
 
@@ -11,11 +12,12 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
-    
+
     {% block head %}{% endblock %}
 
     <title>{% block title %}Company Search{% endblock %}</title>
 </head>
+
 <body>
 
     {% include 'base_templates/navbar.html' %}
@@ -24,13 +26,12 @@
         {% block content %}
         {% endblock %}
     </div>
-    
 
-    <script src="{% static 'js/main.js' %}"></script>
+
+    <script src="{% static 'js/search.js' %}"></script>
     <script src="{% block extra_js %}{% endblock %}"></script>
 </body>
 
 
 
 </html>
-

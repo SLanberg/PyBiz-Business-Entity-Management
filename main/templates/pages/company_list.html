@@ -4,29 +4,31 @@
 
 {% load static %}
 
-{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/company_list.css' %}">{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/company_list.css' %}">
+{% endblock %}
 
 
 
 {% block content %}
 
-    <style>
-    
-    </style>
+<style>
 
-    <div class="search-results">
-        <form method="get">
-            <input class="wide-input" type="text" name="q" placeholder="Search for companies..." value="{{ search_query }}">
-            <button type="submit">Search</button>
-        </form>
-    
-        {% for company in companies %}
+</style>
+
+<div class="search-results">
+    <form method="get">
+        <input class="wide-input" type="text" name="q" placeholder="Search for companies..." value="{{ search_query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% for company in companies %}
     <div class="search-result">
         <h2><a href="{% url 'company_detail' company_id=company.id %}">{{ company.name }}</a></h2>
-        <p class="info">{{ company.establishment_date }} - Total Capital: ${{ company.total_capital_size }} - Registration Code: {{ company.registration_code }}</p>
+        <p class="info">{{ company.establishment_date }} - Total Capital: ${{ company.total_capital_size }} -
+            Registration Code: {{ company.registration_code }}</p>
     </div>
-{% endfor %}
+    {% endfor %}
 
-    </div>
 </div>
 {% endblock %}
