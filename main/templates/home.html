@@ -2,7 +2,11 @@
 
 {% load static %}
 
-{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div id="slogan-container">
