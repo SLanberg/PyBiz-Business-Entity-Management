@@ -11,8 +11,8 @@
         </a>
         <div id="options-section">
             <p><a href="{% url 'home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></p>         
-            <p>About</p>
-            <p>Contact</p>
+            <p><a href="{% url 'establish_company' %}" class="nav-link {% if request.path == '/establish' %}active{% endif %}">Establish</a></p>         
+
             <img src="{% static 'media/navbar/search.png' %}" alt="Your Image Description">
             <div id="separator"></div>
             <img src="{% static 'media/navbar/Globe.png' %}" alt="Your Image Description">
