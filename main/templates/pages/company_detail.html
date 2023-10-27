@@ -12,7 +12,9 @@
 <div id="section">
     <div class="flex-container">
         <h1>{{ company.name }}</h1>
-        <img class="image" src="{% static 'media/edit.png' %}" alt="Edit">
+        <a href="{% url 'edit_company' company.id %}">
+            <img class="image" src="{% static 'media/edit.png' %}" alt="Edit">
+        </a>
     </div>
 
     <p>Registration Code: {{ company.registration_code }}</p>

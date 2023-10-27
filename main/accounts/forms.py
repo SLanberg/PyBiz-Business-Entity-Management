@@ -1,5 +1,5 @@
 from django import forms
-from .models import LimitedLiabilityCompany, Shareholder
+from .models import LimitedLiabilityCompany, Shareholder, NaturalPerson
 from django.forms import inlineformset_factory
 
 
@@ -26,3 +26,13 @@ class LimitedLiabilityCompanyForm(forms.ModelForm):
         widgets = {
             'establishment_date': forms.widgets.DateInput(attrs={'type': 'date'}, )
         }
+
+
+class CompanyEditForm(forms.ModelForm):
+    class Meta:
+        model = LimitedLiabilityCompany
+        fields = ['name', 'registration_code', 'establishment_date', 'total_capital_size']
+
+    def __init__(self, *args, **kwargs):
+        super(CompanyEditForm, self).__init__(*args, **kwargs)
+        # You can add additional form field customizations if needed

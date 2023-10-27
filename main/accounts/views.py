@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import LimitedLiabilityCompany
-from .forms import LimitedLiabilityCompanyForm, ShareholderFormSet, Shareholder
+from .models import LimitedLiabilityCompany, Shareholder
+from .forms import LimitedLiabilityCompanyForm, ShareholderFormSet, CompanyEditForm
 from django.shortcuts import render, redirect
 
 
@@ -35,3 +35,18 @@ def create_limited_liability_company(request):
         formset = ShareholderFormSet(instance=LimitedLiabilityCompany())
 
     return render(request, 'pages/establish.html', {'form': form, 'formset': formset})
+
+
+def edit_company(request, company_id):
+    company = get_object_or_404(LimitedLiabilityCompany, pk=company_id)
+    
+    if request.method == 'POST':
+        form = CompanyEditForm(request.POST, instance=company)
+        if form.is_valid():
+            form.save()
+            return redirect('company_data_view')  # Redirect to company data view or any other desired view
+
+    else:
+        form = CompanyEditForm(instance=company)
+    
+    return render(request, 'pages/increase_capital.html', {'form': form, 'company': company})

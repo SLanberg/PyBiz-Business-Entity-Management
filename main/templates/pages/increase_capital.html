@@ -1,0 +1,21 @@
+{% extends "base_templates/base.html" %}
+{% load static %}
+
+{% block title %}Establish a Limited Liability Company{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/company_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="section">
+    <h1>Edit Company {{ company.name }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+
+   
+</div>
+{% endblock %}
