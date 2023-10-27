@@ -5,9 +5,12 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
-
 <script src="{% static 'js/establish-company.js' %}"></script>
+
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}"> -->
+
 {% endblock %}
+
 
 {% block content %}
 &nbsp;
@@ -25,6 +28,8 @@
             </select> -->
 
         {% for form in formset.forms %}
+
+        
         <div class="form-container">
             {{ form.as_table }}
         </div>
@@ -33,7 +38,6 @@
         {% endfor %}
 
     </div>
-
 
     <button type="button" id="add-shareholder">Add More Shareholders</button>
     <button style="margin:20px 0 20px 0; display: block;" type="submit">Submit</button>
