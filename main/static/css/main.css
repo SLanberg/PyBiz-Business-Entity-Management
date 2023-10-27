@@ -7,12 +7,9 @@ body {
     background-image: url("/static/media/home/background.png");
 }
 
-#search-container {
-    position: relative;
-    text-align: center;
-    margin-top: 40px;
-}
-
-#search-form {
-    display: inline-block;
+.wide-input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 11px;
 }

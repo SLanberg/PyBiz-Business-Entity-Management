@@ -11,14 +11,7 @@
 {% block content %}
 
     <style>
-        .wide-input {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin: 9px;
-            border-radius: 11px;
-        }
-
+    
     </style>
 
     <div class="search-results">
@@ -26,7 +19,6 @@
             <input class="wide-input" type="text" name="q" placeholder="Search for companies..." value="{{ search_query }}">
             <button type="submit">Search</button>
         </form>
-    
     
         {% for company in companies %}
             <div class="search-result">
