@@ -1,0 +1,23 @@
+body {
+    background-color: var(--primary-bg-color);
+    background-image: url("/static/media/home/background.png");
+    background-size: cover;
+    font-family: 'EurostileExtended', sans-serif; /* Apply the custom font to the entire application */
+}
+
+#slogan-container {
+    text-transform: uppercase; /* Convert text to all capital letters */
+    text-align: center; /* Center the text horizontally */
+    position: absolute;
+    top: 50%; /* Center the container vertically */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+}
+
+.wide-input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 9px;
+    border-radius: 11px;
+}

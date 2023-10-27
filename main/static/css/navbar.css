@@ -1,5 +1,59 @@
-/* Navbar styling */
-#navbar-logo {
-    width: 275px;
-    height: 75px;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    background-color: white;
+    width: 900px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'EurostileExtended', sans-serif; /* Apply the custom font to the entire navbar */
+}
+
+#logo-section {
+    display: flex;
+    align-items: center;
+}
+
+#options-section {
+    display: flex;
+    align-items: center;
+}
+
+#separator {
+    border-left: 1px solid grey;
+    height: 35px;
+    display: inline-block;
+}
+
+#options-section p {
+    margin: 0 20px 0 0;
+    
+}
+
+/* Styles for images within #logo-section */
+#logo-section img {
+    margin: 6px 12px 6px 12px;
+}
+
+/* Styles for images within #options-section */
+#options-section img {
+    margin-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link.active {
+    text-decoration: underline;
+    text-decoration-color: #C31D1D;
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
 }

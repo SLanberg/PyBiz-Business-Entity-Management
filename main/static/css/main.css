@@ -1,5 +1,10 @@
-html body {
-    background-color: var(--primary-bg-color);
+* {
+    font-family: 'EurostileExtended', sans-serif;
+}
+
+body {
+    background-color: black;
+    background-image: url("/static/media/home/background.png");
 }
 
 #search-container {
@@ -10,37 +15,4 @@ html body {
 
 #search-form {
     display: inline-block;
-}
-
-#search-input {
-    margin-top: 30px;
-    width: 400px;
-    border: 1px solid var(--search-input-border);
-    border-radius: 24px;
-    padding: 10px 16px;
-    font-size: 16px;
-    background-color: var(--search-input-bg);
-    outline: none;
-}
-
-.button {
-    margin-top: 30px;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 24px;
-    padding: 10px 16px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#quote-section {
-    background-color: rgba(0, 0, 0, 0.5); /* 0.5 represents 50% transparency */
-    padding: 20px;
-    margin-left: 15%;
-    margin-right: 15%;
-}
-
-#slogan {
-    color: white;
 }
