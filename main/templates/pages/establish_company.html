@@ -7,56 +7,46 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
 <script src="{% static 'js/establish-company.js' %}"></script>
 
-<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}"> -->
-
 {% endblock %}
-
 
 {% block content %}
 &nbsp;
-<form method="post">
-    {% csrf_token %}
-
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
         {{ form.non_field_errors }}
         {% for field in form %}
         <tr>
-          <td>{{ field.label_tag }}</td>
-          <td>{{ field }}
-          <p style="margin: 10px;">{{ field.errors }}</p>
-          </td>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}
+            <p style="margin: 10px;">{{ field.errors }}</p>
+            </td>
         </tr>
         <br>
         {% endfor %}
 
-    
-    {{ formset.management_form }}
+        {{ formset.management_form }}
 
-    <!-- Shareholder forms -->
-    <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
-        <!-- <label for="founder_status">Status of the Shareholder:</label>
-            <select id="founder_status" name="founder_status">
-                <option value="Natural" selected>Natural</option>
-                <option value="Legal">Legal</option>
-            </select> -->
+        <!-- Shareholder forms -->
+        <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
+            {% for form in formset.forms %}
 
-        {% for form in formset.forms %}
-
-        
-        <div class="form-container">
-            {{ form.as_table }}
+            <div class="form-container">
+                {{ form.as_table }}
+            </div>
+                
+            <hr>
+            {% endfor %}
         </div>
 
-        <hr>
-        {% endfor %}
+        <button type="button" id="add-shareholder">Add More Shareholders</button>
+        <button style="margin:20px 0 20px 0; display: block;" type="submit">Submit</button>
+    </form>
 
+    <!-- Empty shareholder form template -->
+    <div id="empty-form" style="display: none;">
+        
+        {{ formset.empty_form.as_table }}
     </div>
-
-    <button type="button" id="add-shareholder">Add More Shareholders</button>
-    <button style="margin:20px 0 20px 0; display: block;" type="submit">Submit</button>
-</form>
-
-<!-- Empty shareholder form template -->
-<div id="empty-form" style="display: none;">
-    {{ formset.empty_form.as_table }}
 </div>
 {% endblock %}

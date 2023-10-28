@@ -33,6 +33,7 @@ class LimitedLiabilityCompany(models.Model):
 
     def __str__(self):
         return self.name + " | " + self.registration_code
+    
 
 
 class Shareholder(models.Model):
