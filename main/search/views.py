@@ -20,17 +20,19 @@ def company_list(request):
             registration_code__icontains=term)
 
         # Search shareholder name or shareholder code
-        # search_filter |= Q(shareholders__name__icontains=term) | Q(shareholders__code__icontains=term)
+        search_filter |= Q(shareholder__natural_person__first_name__icontains=term) | Q(shareholder__natural_person__last_name__icontains=term) | Q(
+            shareholder__legal_entity__name__icontains=term) | Q(shareholder__legal_entity__registration_code__icontains=term)
 
-    # Use the Q object to filter the LimitedLiabilityCompany model
+    # Use the Q object to filter the LimitedLiabilityCompany model and order by a specific field (e.g., name)
     companies = LimitedLiabilityCompany.objects.filter(
-        search_filter).distinct()
+        search_filter).distinct().order_by('name')
 
     # Pagination
-    page = request.GET.get('page', 1)  # Get the current page number from the request
-    per_page = 10  # Number of items to display per page
+    # Get the current page number from the request
+    page = request.GET.get('page', 1)
+    per_page = 5  # Number of items to display per page
     paginator = Paginator(companies, per_page)
-    
+
     try:
         companies = paginator.page(page)
     except PageNotAnInteger:

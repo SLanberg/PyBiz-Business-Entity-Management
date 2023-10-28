@@ -41,13 +41,14 @@
                 <a href="?page={{ companies.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
              -->
-            {% for i in companies.paginator.page_range %}
+             {% for i in companies.paginator.page_range %}
                 {% if i == companies.number %}
                     <span class="page-number current">{{ i }}</span>
                 {% else %}
-                    <a href="?page={{ i }}" class="page-number">{{ i }}</a>
+                    <a href="?q={{ search_query|urlencode }}&page={{ i }}" class="page-number">{{ i }}</a>
                 {% endif %}
-            {% endfor %}
+         {% endfor %}
+         
         </span>
     </div>
     
