@@ -14,7 +14,7 @@ ShareholderFormSet = inlineformset_factory(
     Shareholder,              # Child model
     form=ShareholderForm,
     extra=1,                  # Number of empty forms to display
-    can_delete=False,
+    can_delete=True,
 )
 
 
@@ -32,7 +32,8 @@ class LimitedLiabilityCompanyForm(forms.ModelForm):
 class CompanyEditForm(forms.ModelForm):
     class Meta:
         model = LimitedLiabilityCompany
-        fields = ['name', 'registration_code', 'establishment_date', 'total_capital_size']
+        fields = ['name', 'registration_code',
+                  'establishment_date', 'total_capital_size']
 
     # Define the Shareholder formset as an attribute of the CompanyEditForm
     shareholders = ShareholderFormSet(queryset=Shareholder.objects.none())
