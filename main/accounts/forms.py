@@ -15,6 +15,7 @@ ShareholderFormSet = inlineformset_factory(
     form=ShareholderForm,
     extra=1,                  # Number of empty forms to display
     can_delete=True,
+    can_delete_extra=False
 )
 
 

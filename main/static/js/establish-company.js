@@ -24,7 +24,18 @@ $(document).ready(function () {
     $("#id_" + formsetPrefix + "-TOTAL_FORMS").val(parseInt(formIdx) + 1);
   });
 
+
+  function updateTotalForms() {
+    var totalFormsInput = $("#id_shareholder_set-TOTAL_FORMS");
+    var currentTotalForms = parseInt(totalFormsInput.val());
+    totalFormsInput.val(currentTotalForms - 1);
+    
+}
+
+
   $(document).on("click", ".remove-form", function () {
     $(this).closest(".form-container").remove();
+    updateTotalForms();
   });
+
 });
