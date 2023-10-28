@@ -18,17 +18,29 @@ def create_limited_liability_company(request):
             request.POST, instance=LimitedLiabilityCompany())
 
         if form.is_valid() and formset.is_valid():
-            # Save the LimitedLiabilityCompany
-            limited_liability_company = form.save()
+            total_capital_size = form.cleaned_data.get('total_capital_size')
 
-            # Associate each shareholder with the limited liability company
-            for shareholder_form in formset:
-                shareholder = shareholder_form.save(commit=False)
-                if shareholder.natural_person or shareholder.legal_entity:
-                    shareholder.company = limited_liability_company
-                    shareholder.save()
+            # Calculate the sum of share_count for all shareholders in the formset
+            share_count_sum = sum(shareholder_form.cleaned_data.get(
+                'share_count', 0) for shareholder_form in formset)
 
-            return redirect('company_detail', company_id=limited_liability_company.id)
+            # Check if the sum is equal to total_capital_size
+            if share_count_sum == total_capital_size:
+                # Save the LimitedLiabilityCompany
+                limited_liability_company = form.save()
+
+                # Associate each shareholder with the limited liability company
+                for shareholder_form in formset:
+                    shareholder = shareholder_form.save(commit=False)
+                    if shareholder.natural_person or shareholder.legal_entity:
+                        shareholder.company = limited_liability_company
+                        shareholder.save()
+
+                return redirect('company_detail', company_id=limited_liability_company.id)
+            else:
+                # If the sum is not equal, return an error message or handle it as needed
+                form.add_error(
+                    'total_capital_size', 'The sum of share counts must be equal to the total capital size.')
 
     else:
         form = LimitedLiabilityCompanyForm()
@@ -44,7 +56,8 @@ def edit_company(request, company_id):
         form = CompanyEditForm(request.POST, instance=company)
 
         # Create an instance of ShareholderFormSet with the POST data
-        shareholder_formset = ShareholderFormSet(request.POST, instance=company)
+        shareholder_formset = ShareholderFormSet(
+            request.POST, instance=company)
 
         if form.is_valid() and shareholder_formset.is_valid():
             form.save()
@@ -59,4 +72,3 @@ def edit_company(request, company_id):
         shareholder_formset = ShareholderFormSet(instance=company)
 
     return render(request, 'pages/increase_capital.html', {'form': form, 'shareholder_formset': shareholder_formset, 'company': company})
-

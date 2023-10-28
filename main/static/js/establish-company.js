@@ -26,11 +26,5 @@ $(document).ready(function () {
 
   $(document).on("click", ".remove-form", function () {
     $(this).closest(".form-container").remove();
-    // updateFormCount();
   });
-
-  // function updateFormCount() {
-  //     const forms = $('.form-container');
-  //     $('#id_' + formsetPrefix + '-TOTAL_FORMS').val(forms.length);
-  // }
 });

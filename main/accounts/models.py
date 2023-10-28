@@ -30,6 +30,7 @@ class LimitedLiabilityCompany(models.Model):
     )
     establishment_date = models.DateField(
         validators=[establishment_date_validator])
+    
 
     def __str__(self):
         return self.name + " | " + self.registration_code
