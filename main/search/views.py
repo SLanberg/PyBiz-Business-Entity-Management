@@ -1,6 +1,7 @@
 from accounts.models import LimitedLiabilityCompany
 from django.shortcuts import render
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def company_list(request):
@@ -24,6 +25,20 @@ def company_list(request):
     # Use the Q object to filter the LimitedLiabilityCompany model
     companies = LimitedLiabilityCompany.objects.filter(
         search_filter).distinct()
+
+    # Pagination
+    page = request.GET.get('page', 1)  # Get the current page number from the request
+    per_page = 10  # Number of items to display per page
+    paginator = Paginator(companies, per_page)
+    
+    try:
+        companies = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page parameter is not an integer, show the first page
+        companies = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range (e.g., 9999), show the last page
+        companies = paginator.page(paginator.num_pages)
 
     context = {
         'search_query': search_query,

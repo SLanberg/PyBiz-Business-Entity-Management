@@ -8,8 +8,6 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/company_list.css' %}">
 {% endblock %}
 
-
-
 {% block content %}
 
 <style>
@@ -30,5 +28,30 @@
     </div>
     {% endfor %}
 
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            <!-- {% if companies.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ companies.previous_page_number }}">previous</a>
+            {% endif %} -->
+        
+            <!-- {% if companies.has_next %}
+                <a href="?page={{ companies.next_page_number }}">next</a>
+                <a href="?page={{ companies.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+             -->
+            {% for i in companies.paginator.page_range %}
+                {% if i == companies.number %}
+                    <span class="page-number current">{{ i }}</span>
+                {% else %}
+                    <a href="?page={{ i }}" class="page-number">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+        </span>
+    </div>
+    
+
 </div>
+
 {% endblock %}
