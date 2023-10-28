@@ -1,6 +1,7 @@
 from django.test import TestCase
 from accounts.models import NaturalPerson, LegalEntity, LimitedLiabilityCompany, Shareholder
 
+
 class NaturalPersonTestCase(TestCase):
     def test_natural_person_creation(self):
         natural_person = NaturalPerson.objects.create(
@@ -13,6 +14,7 @@ class NaturalPersonTestCase(TestCase):
         self.assertEqual(natural_person.last_name, "Doe")
         self.assertEqual(natural_person.id_code, "12345678901")
 
+
 class LegalEntityTestCase(TestCase):
     def test_legal_entity_creation(self):
         legal_entity = LegalEntity.objects.create(
@@ -22,6 +24,7 @@ class LegalEntityTestCase(TestCase):
 
         self.assertEqual(legal_entity.name, "Example Corp")
         self.assertEqual(legal_entity.registration_code, "ABC12345678")
+
 
 class LimitedLiabilityCompanyTestCase(TestCase):
     def test_company_creation(self):
@@ -36,6 +39,7 @@ class LimitedLiabilityCompanyTestCase(TestCase):
         self.assertEqual(company.registration_code, "XYZ123")
         self.assertEqual(str(company.establishment_date), "2023-10-27")
         self.assertEqual(company.total_capital_size, 100000)
+
 
 class ShareholderTestCase(TestCase):
     def test_shareholder_creation(self):
