@@ -32,9 +32,27 @@ class LimitedLiabilityCompanyForm(forms.ModelForm):
 class CompanyEditForm(forms.ModelForm):
     class Meta:
         model = LimitedLiabilityCompany
-        fields = ['name', 'registration_code',
-                  'establishment_date', 'total_capital_size']
+        fields = ['name', 'registration_code', 'establishment_date', 'total_capital_size']
+
+    # Define the Shareholder formset as an attribute of the CompanyEditForm
+    shareholders = ShareholderFormSet(queryset=Shareholder.objects.none())
 
     def __init__(self, *args, **kwargs):
         super(CompanyEditForm, self).__init__(*args, **kwargs)
-        # You can add additional form field customizations if needed
+
+        # Check if there are instance data and update the Shareholder formset accordingly
+        if 'instance' in kwargs and kwargs['instance'] is not None:
+            self.shareholders = ShareholderFormSet(instance=kwargs['instance'])
+
+    # You can add additional form field customizations if needed
+
+    def save(self, *args, **kwargs):
+        # Save the LimitedLiabilityCompany instance
+        company = super().save(*args, **kwargs)
+
+        # Save the Shareholder formset if it's valid
+        if self.shareholders.is_valid():
+            self.shareholders.instance = company  # Set the instance for the formset
+            self.shareholders.save()
+
+        return company

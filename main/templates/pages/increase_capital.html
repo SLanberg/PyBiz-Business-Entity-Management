@@ -1,7 +1,7 @@
 {% extends "base_templates/base.html" %}
 {% load static %}
 
-{% block title %}Establish a Limited Liability Company{% endblock %}
+{% block title %}Edit {{ company.name }} - Limited Liability Company{% endblock %}
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/company_detail.css' %}">
@@ -12,10 +12,20 @@
   <h1>Edit Company {{ company.name }}</h1>
   <form method="post">
     {% csrf_token %}
+    
+    <!-- Display LimitedLiabilityCompany fields -->
     {{ form.as_p }}
+    
+    <!-- Display Shareholder formset -->
+    <table>
+      {{ form.shareholders.management_form }}
+      {% for form in form.shareholders %}
+        {{ form.as_table }}
+      {% endfor %}
+    </table>
+    
+    
     <button type="submit">Save</button>
   </form>
-
-
 </div>
 {% endblock %}

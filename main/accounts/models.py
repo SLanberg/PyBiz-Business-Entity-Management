@@ -1,6 +1,7 @@
-from django.db import models
+from django.db import models, IntegrityError
 from django.core.validators import MinValueValidator
 from .validators import establishment_date_validator
+from django.db.models import Q
 
 
 class NaturalPerson(models.Model):
@@ -43,3 +44,19 @@ class Shareholder(models.Model):
         LimitedLiabilityCompany, null=True, blank=True, on_delete=models.CASCADE)
     share_count = models.PositiveIntegerField()
     is_founder = models.BooleanField(default=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=~Q(natural_person__isnull=False,
+                         legal_entity__isnull=False),
+                name="either_natural_person_or_legal_entity"
+            )
+        ]
+
+    def save(self, *args, **kwargs):
+        # Ensure that only one of natural_person or legal_entity is set
+        if self.natural_person and self.legal_entity:
+            raise IntegrityError(
+                "A shareholder can only be associated with either a NaturalPerson or a LegalEntity, not both.")
+        super(Shareholder, self).save(*args, **kwargs)
