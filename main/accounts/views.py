@@ -45,7 +45,7 @@ def edit_company(request, company_id):
         if form.is_valid():
             form.save()
             # Redirect to company data view or any other desired view
-            return redirect('company_data_view')
+            return redirect('company_detail', company_id=company_id)
 
     else:
         form = CompanyEditForm(instance=company)
