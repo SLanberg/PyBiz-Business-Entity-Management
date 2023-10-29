@@ -30,7 +30,7 @@ def company_list(request):
     # Pagination
     # Get the current page number from the request
     page = request.GET.get('page', 1)
-    per_page = 5  # Number of items to display per page
+    per_page = 10  # Number of items to display per page
     paginator = Paginator(companies, per_page)
 
     try:
