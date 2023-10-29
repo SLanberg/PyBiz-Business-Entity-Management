@@ -4,8 +4,8 @@
 {% block title %}Establish a Limited Liability Company{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
 
 <script src="{% static 'js/establish-company.js' %}"></script>
 
@@ -62,7 +62,6 @@
         <!-- Shareholder forms -->
         <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
             {% for form in formset.forms %}
-
             <div class="form-container">
                 <label>Natural person:</label>
                 <td>{{ form.natural_person }}</td>
@@ -80,11 +79,19 @@
                 </div>
                 {% endif %}
 
+                {% if form.non_field_errors %}
+                <div class="error-message">
+                    <span class="error-text">{{ form.non_field_errors }}</span>
+                </div>
+                {% endif %}
+
+            
+
                 <label>Share count</label>
                 <td>{{ form.share_count }}</td>
                 {% if form.share_count.errors %}
                 <div class="error-message">
-                    <span class="error-text">{{ form.legal_entity.errors }}</span>
+                    <span class="error-text">{{ form.share_count.errors }}</span>
                 </div>
                 {% endif %}
             </div>
