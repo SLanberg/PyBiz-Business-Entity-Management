@@ -10,31 +10,69 @@
 {% endblock %}
 
 {% block content %}
-&nbsp;
+
+<!-- Renders the management form for the formset, 
+    providing metadata necessary for processing multiple forms on the same page. -->
+{{ formset.management_form }}
+
+
+<!-- This is used to get constraints related errors -->
+<!-- {{ form.non_field_errors }} -->
+
+
+
 <div class="container">
     <form method="post">
         {% csrf_token %}
-        {{ form.non_field_errors }}
-        {% for field in form %}
-        <tr>
-            <td>{{ field.label_tag }}</td>
-            <td>{{ field }}
-            <p style="margin: 10px;">{{ field.errors }}</p>
-            </td>
-        </tr>
-        <br>
-        {% endfor %}
 
-        {{ formset.management_form }}
+        <div class="form-container">
+            <label>Company name:</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+            <p style="margin: 10px;">{{ form.natural_person.errors }}</p>
+            {% endif %}
+
+            <label>Registration code:</label>
+            {{ form.registration_code }}
+            {% if form.registration_code.errors %}
+            <p style="margin: 10px;">{{ form.registration_code.errors }}</p>
+            {% endif %}
+
+            <label>Establishment date:</label>
+            {{ form.establishment_date }}
+            {% if form.establishment_date.errors %}
+            <p style="margin: 10px;">{{ form.establishment_date.errors }}</p>
+            {% endif %}
+        </div>
+
+
 
         <!-- Shareholder forms -->
         <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
             {% for form in formset.forms %}
 
             <div class="form-container">
-                {{ form.as_table }}
+                <label>Natural person:</label>
+                <td>{{ form.natural_person }}</td>
+                {% if form.natural_person.errors %}
+                <p style="margin: 10px;">{{ form.natural_person.errors }}</p>
+                {% endif %}
+
+                <label>Legal entity:</label>
+                <td>{{ form.legal_entity }}</td>
+                <p style="margin: 10px;">{{ field.errors }}</p>
+                {% if form.legal_entity.errors %}
+                <p style="margin: 10px;">{{ form.legal_entity.errors }}</p>
+                {% endif %}
+
+                <label>Share count</label>
+                <td></td>{{ form.share_count }}</td>
+                <p style="margin: 10px;">{{ field.errors }}</p>
+                {% if form.share_count.errors %}
+                <p style="margin: 10px;">{{ form.share_count.errors }}</p>
+                {% endif %}
             </div>
-                
+
             <hr>
             {% endfor %}
         </div>
@@ -44,6 +82,7 @@
     </form>
 
     <!-- Empty shareholder form template -->
+    <!-- This is important part to build more dynamic forms related to the Shareholders -->
     <div id="empty-form" style="display: none;">
         {{ formset.empty_form.as_table }}
     </div>
