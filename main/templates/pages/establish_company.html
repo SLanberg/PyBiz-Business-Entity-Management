@@ -5,21 +5,17 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+
 <script src="{% static 'js/establish-company.js' %}"></script>
 
 {% endblock %}
 
 {% block content %}
 
-<!-- Renders the management form for the formset, 
-    providing metadata necessary for processing multiple forms on the same page. -->
-{{ formset.management_form }}
-
 
 <!-- This is used to get constraints related errors -->
 <!-- {{ form.non_field_errors }} -->
-
-
 
 <div class="container">
     <form method="post">
@@ -29,23 +25,39 @@
             <label>Company name:</label>
             {{ form.name }}
             {% if form.name.errors %}
-            <p style="margin: 10px;">{{ form.natural_person.errors }}</p>
+                <div class="error-message">
+                    <span class="error-text">{{ form.natural_person.errors }}</span>
+                </div>
             {% endif %}
 
             <label>Registration code:</label>
             {{ form.registration_code }}
             {% if form.registration_code.errors %}
-            <p style="margin: 10px;">{{ form.registration_code.errors }}</p>
+            <div class="error-message">
+                <span class="error-text">{{ form.registration_code.errors }}</span>
+            </div>
             {% endif %}
 
             <label>Establishment date:</label>
             {{ form.establishment_date }}
             {% if form.establishment_date.errors %}
-            <p style="margin: 10px;">{{ form.establishment_date.errors }}</p>
+                <div class="error-message">
+                    <span class="error-text">{{ form.establishment_date.errors }}</span>
+                </div>
+            {% endif %}
+
+            <label>Total capital size:</label>
+            {{ form.total_capital_size }}
+            {% if form.total_capital_size.errors %}
+                <div class="error-message">
+                    <span class="error-text">{{ form.total_capital_size.errors }}</span>
+                </div>
             {% endif %}
         </div>
 
-
+        <!-- Renders the management form for the formset, 
+        providing metadata necessary for processing multiple forms on the same page. -->
+        {{ formset.management_form }}
 
         <!-- Shareholder forms -->
         <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
@@ -55,21 +67,25 @@
                 <label>Natural person:</label>
                 <td>{{ form.natural_person }}</td>
                 {% if form.natural_person.errors %}
-                <p style="margin: 10px;">{{ form.natural_person.errors }}</p>
+                <div class="error-message">
+                    <span class="error-text">{{ form.natural_person.errors }}</span>
+                </div>
                 {% endif %}
 
                 <label>Legal entity:</label>
                 <td>{{ form.legal_entity }}</td>
-                <p style="margin: 10px;">{{ field.errors }}</p>
                 {% if form.legal_entity.errors %}
-                <p style="margin: 10px;">{{ form.legal_entity.errors }}</p>
+                <div class="error-message">
+                    <span class="error-text">{{ form.legal_entity.errors }}</span>
+                </div>
                 {% endif %}
 
                 <label>Share count</label>
-                <td></td>{{ form.share_count }}</td>
-                <p style="margin: 10px;">{{ field.errors }}</p>
+                <td>{{ form.share_count }}</td>
                 {% if form.share_count.errors %}
-                <p style="margin: 10px;">{{ form.share_count.errors }}</p>
+                <div class="error-message">
+                    <span class="error-text">{{ form.legal_entity.errors }}</span>
+                </div>
                 {% endif %}
             </div>
 
