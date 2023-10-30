@@ -4,17 +4,10 @@ from django.forms import inlineformset_factory
 
 
 class ShareholderForm(forms.ModelForm):
-    entity_type = forms.ChoiceField(
-        choices=(('natural_person', 'Natural Person'), ('legal_entity', 'Legal Entity')),
-        widget=forms.Select(),
-        initial='natural_person',
-        label='Entity type:',
-    )
-
 
     class Meta:
         model = Shareholder
-        fields = ['entity_type', 'natural_person', 'legal_entity', 'share_count',]
+        fields = ['natural_person', 'legal_entity', 'share_count',]
 
 
 class ShareholderFormEdit(forms.ModelForm):

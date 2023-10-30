@@ -4,6 +4,7 @@ from .forms import LimitedLiabilityCompanyForm, ShareholderFormSet, CompanyEditF
 from django.shortcuts import render, redirect
 
 
+
 def company_detail(request, company_id):
     company = get_object_or_404(LimitedLiabilityCompany, pk=company_id)
     shareholders = Shareholder.objects.filter(company=company)
@@ -41,6 +42,7 @@ def create_limited_liability_company(request):
                 # If the sum is not equal, return an error message or handle it as needed
                 form.add_error(
                     'total_capital_size', 'The sum of the share counts must be equal to the total capital size.')
+
     else:
         form = LimitedLiabilityCompanyForm()
         formset = ShareholderFormSet(instance=LimitedLiabilityCompany())
@@ -68,6 +70,7 @@ def edit_company(request, company_id):
             return redirect('company_detail', company_id=company_id)
     else:
         form = CompanyEditForm(instance=company)
-        formset = ShareholderFormSet(instance=LimitedLiabilityCompany())
+        formset = ShareholderFormSet(instance=company)  # Change this line
 
     return render(request, 'pages/increase_capital.html', {'form': form, 'formset': formset, 'company': company})
+

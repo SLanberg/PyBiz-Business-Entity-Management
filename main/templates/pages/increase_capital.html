@@ -52,12 +52,18 @@
     <h2>Shareholders:</h2>
 
     <table>
-      {{ form.shareholders.management_form }}
-      
-      {% for form in form.shareholders %}
+      <!-- {% for form in form.shareholders %}
         {{ form.as_table }}
+      {% endfor %} -->
+
+      {{ formset.management_form }}
+      
+      {% for form in formset.forms %}
+        {{ form }}
+        
       {% endfor %}
     </table>
+
     
     
     <button type="submit">Save</button>

@@ -56,8 +56,8 @@
         <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
             {% for form in formset.forms %}
             <div class="form-container">
-                <label>{{ form.entity_type.label }}</label>
-                <td>{{ form.entity_type }}</td>
+                <!-- <label>{{ form.entity_type.label }}</label>
+                <td>{{ form.entity_type }}</td> -->
 
                 <label for="id_{{ form.prefix }}-natural_person">{{ form.natural_person.label }}</label>
                 <td>{{ form.natural_person }}</td>
