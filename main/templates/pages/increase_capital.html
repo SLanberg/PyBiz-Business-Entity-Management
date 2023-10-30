@@ -59,9 +59,17 @@
       {{ formset.management_form }}
       
       {% for form in formset.forms %}
-        {{ form }}
-        
-      {% endfor %}
+        {% for field in form %}
+            {% if field.field.widget.input_type != 'hidden' %}
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            {% else %}
+            {{ field }}
+            {% endif %}
+        {% endfor %}
+        <hr>
+    {% endfor %}
     </table>
 
     
