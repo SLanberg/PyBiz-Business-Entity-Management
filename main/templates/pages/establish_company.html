@@ -59,7 +59,7 @@
                 <label>{{ form.entity_type.label }}</label>
                 <td>{{ form.entity_type }}</td>
 
-                <label>Natural person:</label>
+                <label for="id_{{ form.prefix }}-natural_person">{{ form.natural_person.label }}</label>
                 <td>{{ form.natural_person }}</td>
                 {% if form.natural_person.errors %}
                 <div class="error-message">
@@ -67,7 +67,7 @@
                 </div>
                 {% endif %}
 
-                <label>Legal entity:</label>
+                <label for="id_{{ form.prefix }}-legal_entity">{{ form.legal_entity.label }}</label>
                 <td>{{ form.legal_entity }}</td>
                 {% if form.legal_entity.errors %}
                 <div class="error-message">
