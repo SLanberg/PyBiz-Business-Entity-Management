@@ -14,11 +14,45 @@
     {% csrf_token %}
     
     <!-- Display LimitedLiabilityCompany fields -->
-    {{ form.as_p }}
+    <div class="form-container">
+      <label>Company name:</label>
+      {{ form.name }}
+      {% if form.name.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.natural_person.errors }}</span>
+      </div>
+      {% endif %}
+
+      <label>Registration code:</label>
+      {{ form.registration_code }}
+      {% if form.registration_code.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.registration_code.errors }}</span>
+      </div>
+      {% endif %}
+
+      <label>Establishment date:</label>
+      {{ form.establishment_date }}
+      {% if form.establishment_date.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.establishment_date.errors }}</span>
+      </div>
+      {% endif %}
+
+      <label>Total capital size:</label>
+      {{ form.total_capital_size }}
+      {% if form.total_capital_size.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.total_capital_size.errors }}</span>
+      </div>
+      {% endif %}
+    </div>
     
     <!-- Display Shareholder formset -->
+    <h2>Shareholders:</h2>
     <table>
       {{ form.shareholders.management_form }}
+      
       {% for form in form.shareholders %}
         {{ form.as_table }}
       {% endfor %}

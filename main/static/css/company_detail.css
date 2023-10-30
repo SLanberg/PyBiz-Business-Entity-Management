@@ -16,3 +16,17 @@
 .image {
     height: 30px;
 }
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+select {
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}

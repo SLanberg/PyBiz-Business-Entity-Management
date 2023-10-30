@@ -40,7 +40,7 @@ def create_limited_liability_company(request):
             else:
                 # If the sum is not equal, return an error message or handle it as needed
                 form.add_error(
-                    'total_capital_size', 'The sum of the share counts of shareholders must equal the total capital size.')
+                    'total_capital_size', 'The sum of the share counts must be equal to the total capital size.')
 
     else:
         form = LimitedLiabilityCompanyForm()

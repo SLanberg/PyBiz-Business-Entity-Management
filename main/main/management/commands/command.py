@@ -29,21 +29,13 @@ class Command(BaseCommand):
                 first_name=first_name, last_name=last_name, id_code=id_code)
             natural_persons.append(natural_person)
 
-        corporate_suffixes = [
-            "LLC",
-            "Inc",
-            "Ltd",
-            "Co",
-            "Corp",
-            "GmbH",
-            "S.A.",
-        ]
+
         for _ in range(20):  # Adjust the number of companies as needed
-            company_name = fake.company() + " " + corporate_suffixes[random.randint(0, len(corporate_suffixes) - 1)]
+            company_name = fake.company() + " LLC"
             registration_code = ''.join(random.choices('0123456789', k=7))
             establishment_date = fake.date_between(
                 start_date='-30y', end_date='today')
-            total_capital_size = random.randint(10000, 1000000)
+            total_capital_size = 10000
 
             company = LimitedLiabilityCompany.objects.create(
                 name=company_name,
@@ -53,9 +45,9 @@ class Command(BaseCommand):
             )
 
             # Create Shareholders for the company
-            for _ in range(5):  # Adjust the number of shareholders as needed
+            for i in range(5):  # Adjust the number of shareholders as needed
                 is_founder = random.choice([True, False])
-                share_count = random.randint(1, 100)
+                share_count = total_capital_size / 5
 
                 if is_founder:
                     # Create Shareholder with a NaturalPerson
