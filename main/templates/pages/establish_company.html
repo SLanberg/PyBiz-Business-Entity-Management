@@ -6,17 +6,10 @@
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/establish-company.css' %}">
-
 <script src="{% static 'js/establish-company.js' %}"></script>
-
 {% endblock %}
 
 {% block content %}
-
-
-<!-- This is used to get constraints related errors -->
-<!-- {{ form.non_field_errors }} -->
-
 <div class="container">
     <form method="post">
         {% csrf_token %}
@@ -63,6 +56,9 @@
         <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
             {% for form in formset.forms %}
             <div class="form-container">
+                <label>{{ form.entity_type.label }}</label>
+                <td>{{ form.entity_type }}</td>
+
                 <label>Natural person:</label>
                 <td>{{ form.natural_person }}</td>
                 {% if form.natural_person.errors %}

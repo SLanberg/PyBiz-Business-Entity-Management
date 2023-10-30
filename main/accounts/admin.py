@@ -20,8 +20,8 @@ class ShareholderAdmin(admin.ModelAdmin):
                     'legal_entity', 'share_count', 'is_founder')
 
     def display_company_info(self, obj):
-        return obj.company.name  # Adjust this based on your 'company' model's structure
-
+        return obj.company.name 
+    
     display_company_info.short_description = 'Company Info'
 
 

@@ -11,7 +11,7 @@ def validate_integer(value):
 
 def validate_id_code_length(value):
     if len(value) != 11:
-        raise ValidationError("id_code must have exactly 11 characters")
+        raise ValidationError("Must have exactly 11 numbers")
 
 
 def establishment_date_validator(value):

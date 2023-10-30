@@ -1,9 +1,25 @@
 from django import forms
-from .models import LimitedLiabilityCompany, Shareholder, NaturalPerson
+from .models import LimitedLiabilityCompany, Shareholder
 from django.forms import inlineformset_factory
 
 
 class ShareholderForm(forms.ModelForm):
+    entity_type = forms.ChoiceField(
+        choices=(('natural_person', 'Natural Person'), ('legal_entity', 'Legal Entity')),
+        widget=forms.Select(),
+        initial='natural_person',
+        label='Entity type:',
+    )
+
+
+    class Meta:
+        model = Shareholder
+        fields = ['entity_type', 'natural_person', 'legal_entity', 'share_count',]
+
+
+class ShareholderFormEdit(forms.ModelForm):
+    # is_founder = forms.BooleanField()
+
     class Meta:
         model = Shareholder
         fields = ['natural_person', 'legal_entity', 'share_count',]
@@ -13,6 +29,16 @@ ShareholderFormSet = inlineformset_factory(
     LimitedLiabilityCompany,  # Parent model
     Shareholder,              # Child model
     form=ShareholderForm,
+    extra=1,                  # Number of empty forms to display
+    can_delete=True,
+    can_delete_extra=False
+)
+
+
+ShareholderFormSetEdit = inlineformset_factory(
+    LimitedLiabilityCompany,  # Parent model
+    Shareholder,              # Child model
+    form=ShareholderFormEdit,
     extra=1,                  # Number of empty forms to display
     can_delete=True,
     can_delete_extra=False
@@ -37,24 +63,11 @@ class CompanyEditForm(forms.ModelForm):
                   'establishment_date', 'total_capital_size']
 
     # Define the Shareholder formset as an attribute of the CompanyEditForm
-    shareholders = ShareholderFormSet(queryset=Shareholder.objects.none())
+    shareholders = ShareholderFormSetEdit(queryset=Shareholder.objects.none())
 
     def __init__(self, *args, **kwargs):
         super(CompanyEditForm, self).__init__(*args, **kwargs)
 
         # Check if there are instance data and update the Shareholder formset accordingly
         if 'instance' in kwargs and kwargs['instance'] is not None:
-            self.shareholders = ShareholderFormSet(instance=kwargs['instance'])
-
-    # You can add additional form field customizations if needed
-
-    def save(self, *args, **kwargs):
-        # Save the LimitedLiabilityCompany instance
-        company = super().save(*args, **kwargs)
-
-        # Save the Shareholder formset if it's valid
-        if self.shareholders.is_valid():
-            self.shareholders.instance = company  # Set the instance for the formset
-            self.shareholders.save()
-
-        return company
+            self.shareholders = ShareholderFormSetEdit(instance=kwargs['instance'])

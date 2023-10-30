@@ -41,7 +41,6 @@ def create_limited_liability_company(request):
                 # If the sum is not equal, return an error message or handle it as needed
                 form.add_error(
                     'total_capital_size', 'The sum of the share counts must be equal to the total capital size.')
-
     else:
         form = LimitedLiabilityCompanyForm()
         formset = ShareholderFormSet(instance=LimitedLiabilityCompany())
@@ -56,19 +55,19 @@ def edit_company(request, company_id):
         form = CompanyEditForm(request.POST, instance=company)
 
         # Create an instance of ShareholderFormSet with the POST data
-        shareholder_formset = ShareholderFormSet(
+        formset = ShareholderFormSet(
             request.POST, instance=company)
-
-        if form.is_valid() and shareholder_formset.is_valid():
+        
+        if form.is_valid() and formset.is_valid():
             form.save()
 
             # Save Shareholder data
-            shareholder_formset.save()
+            formset.save()
 
             # Redirect to company data view or any other desired view
             return redirect('company_detail', company_id=company_id)
     else:
         form = CompanyEditForm(instance=company)
-        shareholder_formset = ShareholderFormSet(instance=company)
+        formset = ShareholderFormSet(instance=LimitedLiabilityCompany())
 
-    return render(request, 'pages/increase_capital.html', {'form': form, 'shareholder_formset': shareholder_formset, 'company': company})
+    return render(request, 'pages/increase_capital.html', {'form': form, 'formset': formset, 'company': company})

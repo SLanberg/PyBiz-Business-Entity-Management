@@ -1,13 +1,14 @@
-from django.db import models, IntegrityError
+from django.db import models
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
-from .validators import establishment_date_validator
-from django.db.models import Q
+from .validators import establishment_date_validator, validate_id_code_length
+# from django.db.models import Q
 
 
 class NaturalPerson(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    id_code = models.CharField(max_length=11, unique=True)
+    id_code = models.CharField(max_length=11, unique=True, validators=[validate_id_code_length])
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " | " + self.id_code
@@ -15,7 +16,7 @@ class NaturalPerson(models.Model):
 
 class LegalEntity(models.Model):
     name = models.CharField(max_length=100)
-    registration_code = models.CharField(max_length=11, unique=True)
+    registration_code = models.CharField(max_length=11, unique=True, validators=[validate_id_code_length])
 
     def __str__(self):
         return self.name + " | " + self.registration_code
@@ -23,42 +24,31 @@ class LegalEntity(models.Model):
 
 class LimitedLiabilityCompany(models.Model):
     name = models.CharField(max_length=100)
-    registration_code = models.CharField(max_length=7, unique=True)
-    establishment_date = models.DateField()
-    total_capital_size = models.PositiveIntegerField(
-        validators=[MinValueValidator(2500)]
-    )
-    establishment_date = models.DateField(
-        validators=[establishment_date_validator])
+    registration_code = models.CharField(max_length=11, validators=[validate_id_code_length], unique=True)
+    total_capital_size = models.DecimalField(decimal_places=2, max_digits=30, validators=[MinValueValidator(2500)])
+    establishment_date = models.DateField(null=False, validators=[establishment_date_validator])
     
-
     def __str__(self):
         return self.name + " | " + self.registration_code
     
 
-
 class Shareholder(models.Model):
-    natural_person = models.ForeignKey(
-        NaturalPerson, null=True, blank=True, on_delete=models.CASCADE)
-    legal_entity = models.ForeignKey(
-        LegalEntity, null=True, blank=True, on_delete=models.CASCADE)
-    company = models.ForeignKey(
-        LimitedLiabilityCompany, null=True, blank=True, on_delete=models.CASCADE)
-    share_count = models.PositiveIntegerField()
+    natural_person = models.ForeignKey(NaturalPerson, null=True, blank=True, on_delete=models.CASCADE)
+    legal_entity = models.ForeignKey(LegalEntity, null=True, blank=True, on_delete=models.CASCADE)
+    company = models.ForeignKey(LimitedLiabilityCompany, on_delete=models.CASCADE)
+    share_count = models.DecimalField(decimal_places=2, max_digits=30)
     is_founder = models.BooleanField(default=True)
 
-    class Meta:
-        constraints = [
-            models.CheckConstraint(
-                check=~Q(natural_person__isnull=False,
-                         legal_entity__isnull=False),
-                name="either_natural_person_or_legal_entity"
-            )
-        ]
-
-    def save(self, *args, **kwargs):
+    def clean(self):
         # Ensure that only one of natural_person or legal_entity is set
         if self.natural_person and self.legal_entity:
-            raise IntegrityError(
-                "A shareholder can only be associated with either a NaturalPerson or a LegalEntity, not both.")
+            raise ValidationError("A shareholder can only be associated with either a NaturalPerson or a LegalEntity, not both.")
+        if not self.natural_person and not self.legal_entity:
+            raise ValidationError("At least one should be chosen.")
+
+    def save(self, *args, **kwargs):
+        self.clean()  # Call the clean method to perform validation
         super(Shareholder, self).save(*args, **kwargs)
+
+        def __str__(self):
+            return self.natural_person + " | " + self.legal_entity

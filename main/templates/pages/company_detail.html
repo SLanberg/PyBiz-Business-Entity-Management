@@ -19,7 +19,7 @@
 
     <p>Registration Code: {{ company.registration_code }}</p>
     <p>Establishment Date: {{ company.establishment_date }}</p>
-    <p>Total Capital Size: {{ company.total_capital_size }}</p>
+    <p>Total Capital Size: {{ company.total_capital_size }} €</p>
     <!-- Add more company details as needed -->
 
     <h2>Shareholders:</h2>
@@ -33,7 +33,10 @@
                 {{ shareholder.legal_entity.name }} (Legal Entity)
                 {% endif %}
             </strong>
-            <p>Share Count: {{ shareholder.share_count }}</p>
+            {% if shareholder.legal_entity %}
+            <p>Registration code: {{ shareholder.legal_entity.registration_code }}</p>
+            {% endif %}
+            <p>Share Count: {{ shareholder.share_count }} €</p>
             <p>Is Founder: {% if shareholder.is_founder %}Yes{% else %}No{% endif %}</p>
             <!-- Add more shareholder details as needed -->
         </li>
