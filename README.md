@@ -70,9 +70,9 @@ Set-ExecutionPolicy RemoteSigned
 .\automate_setup.ps1
 # Step 4: 
 .\venv\Scripts\activate
+```
 
 ### Linux/MacOS By Hand
-```
 
 ```bash
 # Step 1: Navigate to the root folder where README.md and requirements.txt are located.
