@@ -46,24 +46,73 @@ The application consists of the following pages:
 - The total capital size must match the sum of shareholders’ shares.
 - Includes a save button to return to the data view.
 
-## Installation
+## Installation Manual
 
-Linux/MacOS:
-1. Go to the root folder where README.md and requirements.txt is placed
-2. Create virtual environmnet "python3 -m venv venv"
-3. Activate virtual environment "source venv/bin/activate"
-4. Install all requirements "pip install -r requirements.txt"
-5. Go to the main directory "cd main"
-6. Run migrations "python3 manage.py makemigrations", "python3 manage.py migrate", "python3 manage.py migrate --run-syncdb"
-7. Run command to populate db "python3 manage.py command"
+This README provides detailed instructions for setting up and installing the application on both Linux/MacOS and Windows systems.
 
-Windows:
-1. Go to the root folder where README.md and requirements.txt is placed
-2. Create virtual environmnet "python -m venv venv"
-3. Activate virtual environment ".\venv\Scripts\activate"
-4. If your system has policy against running scripts: "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned"
-5. Install all requirements "pip install -r requirements.txt"
-6. Go to the main directory "cd main"
-7. Run migrations "python manage.py makemigrations", "python manage.py migrate", "python manage.py migrate --run-syncdb"
-8. Run command to populate db "python manage.py command"
+### Install project with script
 
+# Step 1: Navigate to the root folder where README.md and requirements.txt are located.
+
+### Linux/MacOS
+# Step 2: chmod +x setup.py
+# Step 3: ./setup.py
+
+### Windows:
+# Step 2: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+# Step 3: python setup.py
+
+### Linux/MacOS By Hand
+
+```bash
+# Step 1: Navigate to the root folder where README.md and requirements.txt are located.
+
+# Step 2: Create a virtual environment
+python3 -m venv venv
+
+# Step 3: Activate the virtual environment
+source venv/bin/activate
+
+# Step 4: Install all required dependencies from requirements.txt
+pip install -r requirements.txt
+
+# Step 5: Change to the main directory
+cd main
+
+# Step 6: Run migrations
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py migrate --run-syncdb
+
+# Step 7: Run the command to populate the database
+python3 manage.py command
+```
+
+### Windows Installation By Hand
+
+```bash
+# Step 1: Navigate to the root folder where README.md and requirements.txt are located.
+
+# Step 2: Create a virtual environment
+python -m venv venv
+
+# Step 3: Activate the virtual environment
+.\venv\Scripts\activate
+
+# Step 4: If your system has a policy against running scripts, use the following command:
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
+# Step 5: Install all required dependencies from requirements.txt
+pip install -r requirements.txt
+
+# Step 6: Change to the main directory
+cd main
+
+# Step 7: Run migrations
+python manage.py makemigrations
+python manage.py migrate
+python manage.py migrate --run-syncdb
+
+# Step 8: Run the command to populate the database
+python manage.py command
+```
