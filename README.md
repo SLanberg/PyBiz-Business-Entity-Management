@@ -48,6 +48,7 @@ The application consists of the following pages:
 
 ## Installation
 
+Linux/MacOS:
 1. Go to the root folder where README.md and requirements.txt is placed
 2. Create virtual environmnet "python3 -m venv venv"
 3. Activate virtual environment "source venv/bin/activate"
@@ -55,3 +56,14 @@ The application consists of the following pages:
 5. Go to the main directory "cd main"
 6. Run migrations "python3 manage.py makemigrations", "python3 manage.py migrate", "python3 manage.py migrate --run-syncdb"
 7. Run command to populate db "python3 manage.py command"
+
+Windows:
+1. Go to the root folder where README.md and requirements.txt is placed
+2. Create virtual environmnet "python -m venv venv"
+3. Activate virtual environment ".\venv\Scripts\activate"
+4. If your system has policy against running scripts: "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned"
+5. Install all requirements "pip install -r requirements.txt"
+6. Go to the main directory "cd main"
+7. Run migrations "python manage.py makemigrations", "python manage.py migrate", "python manage.py migrate --run-syncdb"
+8. Run command to populate db "python manage.py command"
+
