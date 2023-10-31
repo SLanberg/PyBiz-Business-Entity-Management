@@ -50,7 +50,7 @@ The application consists of the following pages:
 
 This README provides detailed instructions for setting up and installing the application on both Linux/MacOS and Windows systems.
 
-### Install project with script
+### Install Project With Script
 
 ```bash
 # Step 1: Navigate to the root folder where README.md and requirements.txt are located.
