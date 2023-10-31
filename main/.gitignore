@@ -54,4 +54,4 @@ __pycache__/
 # Ignore the "migrations" directory for database migrations
 /migrations/
 
-
+db.sqlite3
