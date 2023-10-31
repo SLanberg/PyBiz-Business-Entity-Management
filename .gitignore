@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Caches and logs
+*.log
+*.log.*
+*.sqlite3
+
+# Editor-specific files
+.idea/
+.vscode/
+
+# Environment configuration
+.env
+
+# Ignore database
+db.sqlite3
+
+# Ignore local settings (override in production)
+local_settings.py
+
+# Ignore development and temporary files
+*.swp
+*.swo
+*.swn
+*.swm
+*.bak
+
+# Ignore Python virtual environment
+venv/
+.env/
+../venv/
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore pipenv files
+Pipfile
+Pipfile.lock
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+../.DS_Store
+../.vscode/
+
+# Ignore the "__pycache__" directory created by Python
+__pycache__/
+
+# Ignore the "migrations" directory for database migrations
+/migrations/
+
+db.sqlite3

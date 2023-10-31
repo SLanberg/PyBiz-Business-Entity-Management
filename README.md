@@ -52,17 +52,27 @@ This README provides detailed instructions for setting up and installing the app
 
 ### Install project with script
 
+```bash
 # Step 1: Navigate to the root folder where README.md and requirements.txt are located.
 
 ### Linux/MacOS
-# Step 2: chmod +x setup.py
-# Step 3: ./setup.py
+# Step 2: 
+chmod +x automate_setup.sh
+# Step 3: 
+./setup.py
+# Step 4: 
+source venv/bin/activate
 
-### Windows:
-# Step 2: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-# Step 3: python setup.py
+### Windows
+# Step 2: 
+Set-ExecutionPolicy RemoteSigned
+# Step 3: 
+.\automate_setup.ps1
+# Step 4: 
+.\venv\Scripts\activate
 
 ### Linux/MacOS By Hand
+```
 
 ```bash
 # Step 1: Navigate to the root folder where README.md and requirements.txt are located.
