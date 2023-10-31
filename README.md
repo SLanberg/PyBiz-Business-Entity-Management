@@ -52,3 +52,6 @@ The application consists of the following pages:
 2. Create virtual environmnet "python3 -m venv venv"
 3. Activate virtual environment "source venv/bin/activate"
 4. Install all requirements "pip install -r requirements.txt"
+5. Go to the main directory "cd main"
+6. Run migrations "python3 manage.py makemigrations", "python3 manage.py migrate", "python3 manage.py migrate --run-syncdb"
+7. Run command to populate db "python3 manage.py command"
