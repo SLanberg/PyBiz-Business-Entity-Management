@@ -32,6 +32,7 @@ local_settings.py
 # Ignore Python virtual environment
 venv/
 .env/
+../venv/
 
 # Ignore compiled Python files
 *.pyc
@@ -55,5 +56,3 @@ __pycache__/
 /migrations/
 
 db.sqlite3
-
-venv/
