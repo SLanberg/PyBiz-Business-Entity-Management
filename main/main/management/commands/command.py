@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
         # Populate LegalEntity
         legal_entities = []
-        for _ in range(50):  # Adjust the number of entities as needed
+        for _ in range(5):  # Adjust the number of entities as needed
             name = fake.company()
             registration_code = ''.join(random.choices('0123456789', k=11))
             legal_entity = LegalEntity.objects.create(
@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
         # Populate NaturalPerson
         natural_persons = []
-        for _ in range(50):  # Adjust the number of persons as needed
+        for _ in range(5):  # Adjust the number of persons as needed
             first_name = fake.first_name()
             last_name = fake.last_name()
             id_code = ''.join(random.choices('0123456789', k=11))
@@ -35,7 +35,7 @@ class Command(BaseCommand):
             registration_code = ''.join(random.choices('0123456789', k=7))
             establishment_date = fake.date_between(
                 start_date='-30y', end_date='today')
-            total_capital_size = 10000
+            total_capital_size = 6000
 
             company = LimitedLiabilityCompany.objects.create(
                 name=company_name,
@@ -45,9 +45,9 @@ class Command(BaseCommand):
             )
 
             # Create Shareholders for the company
-            for i in range(5):  # Adjust the number of shareholders as needed
+            for i in range(3):  # Adjust the number of shareholders as needed
                 is_founder = random.choice([True, False])
-                share_count = total_capital_size / 5
+                share_count = total_capital_size / 3
 
                 if is_founder:
                     # Create Shareholder with a NaturalPerson
@@ -70,7 +70,7 @@ class Command(BaseCommand):
                     )
 
         self.stdout.write(self.style.SUCCESS(
-            'Successfully populated LegalEntity and created admin user and shareholders.'))
+            'Successfully populated LegalEntity and shareholders.'))
 
 # Create admin user
 # User.objects.create_superuser('admin', 'admin@example.com', 'admin')

@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from accounts.models import LimitedLiabilityCompany
 
+
 class CompanyListViewTestCase(TestCase):
     def setUp(self):
         # Create test data for LimitedLiabilityCompany model
