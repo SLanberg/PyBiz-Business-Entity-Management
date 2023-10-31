@@ -62,6 +62,12 @@ chmod +x automate_setup.sh
 ./setup.py
 # Step 4: 
 source venv/bin/activate
+# Step 5:
+cd main
+# Step 6:
+python3 manage.py runserver
+# Step 7: In browser
+http://127.0.0.1:8000/
 
 ### Windows
 # Step 2: 
@@ -70,6 +76,12 @@ Set-ExecutionPolicy RemoteSigned
 .\automate_setup.ps1
 # Step 4: 
 .\venv\Scripts\activate
+# Step 5:
+cd main
+# Step 6:
+python manage.py runserver
+# Step 7: In browser
+http://127.0.0.1:8000/
 ```
 
 ### Linux/MacOS By Hand
@@ -96,6 +108,12 @@ python3 manage.py migrate --run-syncdb
 
 # Step 7: Run the command to populate the database
 python3 manage.py command
+
+# Step 8: Run server on localhost
+python3 manage.py runserver
+
+# Step 9: In browser
+http://127.0.0.1:8000/
 ```
 
 ### Windows Installation By Hand
@@ -125,4 +143,10 @@ python manage.py migrate --run-syncdb
 
 # Step 8: Run the command to populate the database
 python manage.py command
+
+# Step 9: Run server on localhost
+python manage.py runserver
+
+# Step 10: In browser
+http://127.0.0.1:8000/
 ```
