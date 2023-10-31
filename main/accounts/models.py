@@ -35,11 +35,6 @@ class LimitedLiabilityCompany(models.Model):
 class Shareholder(models.Model):
     natural_person = models.ForeignKey(NaturalPerson, null=True, blank=True, on_delete=models.CASCADE)
     legal_entity = models.ForeignKey(LegalEntity, null=True, blank=True, on_delete=models.CASCADE)
-<<<<<<< HEAD
-    company = models.ForeignKey(LimitedLiabilityCompany, null=True, blank=True, on_delete=models.CASCADE)
-    share_count = models.PositiveIntegerField()
-    is_founder = models.BooleanField(default=True)
-=======
     company = models.ForeignKey(LimitedLiabilityCompany, on_delete=models.CASCADE)
     share_count = models.DecimalField(decimal_places=2, max_digits=30, validators=[validate_share_count])
     is_founder = models.BooleanField(default=True)
@@ -57,4 +52,3 @@ class Shareholder(models.Model):
 
         def __str__(self):
             return self.natural_person + " | " + self.legal_entity
->>>>>>> dev
