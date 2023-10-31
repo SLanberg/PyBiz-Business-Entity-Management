@@ -1,0 +1,85 @@
+{% extends "base_templates/base.html" %}
+{% load static %}
+
+{% block title %}Edit {{ company.name }} - Limited Liability Company{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/company_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="section">
+  <h1>Edit Company {{ company.name }}</h1>
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- Display LimitedLiabilityCompany fields -->
+    <div class="form-container">
+      <label>Company name:</label>
+      {{ form.name }}
+      {% if form.name.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.natural_person.errors }}</span>
+      </div>
+      {% endif %}
+
+      <label>Registration code:</label>
+      {{ form.registration_code }}
+      {% if form.registration_code.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.registration_code.errors }}</span>
+      </div>
+      {% endif %}
+
+      <label>Establishment date:</label>
+      {{ form.establishment_date }}
+      {% if form.establishment_date.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.establishment_date.errors }}</span>
+      </div>
+      {% endif %}
+
+      <label>Total capital size:</label>
+      {{ form.total_capital_size }}
+      {% if form.total_capital_size.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.total_capital_size.errors }}</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Display Shareholder formset -->
+    <h2>Shareholders:</h2>
+
+    <table>
+      <!-- {% for form in form.shareholders %}
+        {{ form.as_table }}
+      {% endfor %} -->
+
+      {{ formset.management_form }}
+
+      {% for form in formset.forms %}
+      {% for field in form %}
+            {% if field.field.widget.input_type != 'hidden' %}
+
+                <div id="spacer"></div>
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                  <div class="error-message">
+                    <span class="error-text">{{ field.errors }}</span>
+                  </div>
+                {% endif %}
+    
+                {% else %}
+                {{ field }}
+            {% endif %}
+      {% endfor %}
+      <hr>
+      {% endfor %}
+    </table>
+
+    <button type="submit">Save</button>
+  </form>
+</div>
+{% endblock %}

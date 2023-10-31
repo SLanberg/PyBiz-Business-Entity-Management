@@ -4,24 +4,51 @@
 
 {% load static %}
 
-{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/company_list.css' %}">{% endblock %}
-
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/company_list.css' %}">
+{% endblock %}
 
 {% block content %}
 
-    <div class="search-results">
-        <form method="get">
-            <input type="text" name="q" placeholder="Search" value="{{ search_query }}">
-            <button type="submit">Search</button>
-        </form>
-    
-    
-        {% for company in companies %}
-            <div class="search-result">
-                <h2>{{ company.name }}</h2>
-                <p class="info">{{ company.establishment_date }} - Total Capital: ${{ company.total_capital_size }} - Registration Code: {{ company.registration_code }}</p>
-            </div>
-        {% endfor %}
+<div class="search-results">
+    <form method="get">
+        <input class="wide-input" type="text" name="q" placeholder="Search for companies..." value="{{ search_query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% for company in companies %}
+    <div class="search-result">
+        <h2><a href="{% url 'company_detail' company_id=company.id %}">{{ company.name }}</a></h2>
+        <p class="info">{{ company.establishment_date }} - Total Capital: €{{ company.total_capital_size }} -
+            Registration Code: {{ company.registration_code }}</p>
     </div>
+    {% endfor %}
+
+    {% if not companies %}
+    <h2>Not found...</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% endif %}
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+
+            {% if companies.paginator.page_range|length > 1 %}
+            {% for i in companies.paginator.page_range %}
+            {% if i == companies.number %}
+            <span class="page-number current">{{ i }}</span>
+            {% else %}
+            <a href="?q={{ search_query|urlencode }}&page={{ i }}" class="page-number">{{ i }}</a>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </span>
+    </div>
+
+
 </div>
+
 {% endblock %}

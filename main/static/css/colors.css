@@ -1,10 +1,10 @@
 /* Define your color palette here */
 :root {
-    --primary-bg-color: #8B0000;
-    --search-input-bg: #f1f3f4;
+    --primary-bg-color: #000000;
+    --search-input-bg: #ffffff;
     --search-input-border: #dfe1e5;
-    --button-bg: #006400;
-    --button-text: #ffffff;
+    --error-background-color: #fce4e4;
+    --error-text-color: #cc0033;
     --black: #000000;
     --white: #ffffff;
 }

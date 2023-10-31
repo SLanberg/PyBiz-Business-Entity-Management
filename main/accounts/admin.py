@@ -3,7 +3,8 @@ from .models import LimitedLiabilityCompany, NaturalPerson, LegalEntity, Shareho
 
 
 class LimitedLiabilityCompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'establishment_date', 'total_capital_size', 'registration_code')
+    list_display = ('name', 'establishment_date',
+                    'total_capital_size', 'registration_code')
 
 
 class NaturalPersonAdmin(admin.ModelAdmin):
@@ -15,13 +16,13 @@ class LegalEntityAdmin(admin.ModelAdmin):
 
 
 class ShareholderAdmin(admin.ModelAdmin):
-    list_display = ('natural_person', 'display_company_info', 'legal_entity', 'share_count', 'is_founder')
+    list_display = ('natural_person', 'display_company_info',
+                    'legal_entity', 'share_count', 'is_founder')
 
     def display_company_info(self, obj):
-        return obj.company.name  # Adjust this based on your 'company' model's structure
-
+        return obj.company.name 
+    
     display_company_info.short_description = 'Company Info'
-
 
 
 admin.site.register(LimitedLiabilityCompany, LimitedLiabilityCompanyAdmin)
