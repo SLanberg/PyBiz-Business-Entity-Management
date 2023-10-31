@@ -33,7 +33,7 @@ The application consists of the following pages:
 - Includes a save button to navigate to the data view upon success.
 
 ## Non-Functional Requirements
-- Easily accessible software for installation. <TODO: Write installation guide>
+- Easily accessible software for installation.
 - Source code includes installation instructions.
 - Automated initial data creation.
 - Separation of CSS for styling.
