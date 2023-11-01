@@ -61,13 +61,27 @@ def edit_company(request, company_id):
             request.POST, instance=company)
         
         if form.is_valid() and formset.is_valid():
-            form.save()
+            total_capital_size = form.cleaned_data.get('total_capital_size')
 
-            # Save Shareholder data
-            formset.save()
+            # Calculate the sum of share_count for all shareholders in the formset
+            share_count_sum = sum(shareholder_form.cleaned_data.get(
+                'share_count', 0) for shareholder_form in formset)
+            
+            if share_count_sum == total_capital_size:
+            
+                print(total_capital_size, share_count_sum)
 
-            # Redirect to company data view or any other desired view
-            return redirect('company_detail', company_id=company_id)
+                form.save()
+
+                # Save Shareholder data
+                formset.save()
+
+                # Redirect to company data view or any other desired view
+                return redirect('company_detail', company_id=company_id)
+            else:
+                # If the sum is not equal, return an error message or handle it as needed
+                form.add_error(
+                    'total_capital_size', 'The sum of the share counts must be equal to the total capital size.')
     else:
         form = CompanyEditForm(instance=company)
         formset = ShareholderFormSet(instance=company)  # Change this line

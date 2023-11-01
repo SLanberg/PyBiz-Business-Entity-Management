@@ -19,4 +19,4 @@ python manage.py migrate --run-syncdb
 python manage.py command
 
 # Deactivate the virtual environment when done
-deactivate
+# deactivate
