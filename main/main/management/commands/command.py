@@ -31,7 +31,7 @@ class Command(BaseCommand):
 
 
         for _ in range(20):  # Adjust the number of companies as needed
-            company_name = fake.company() + " LLC"
+            company_name = fake.company()
             registration_code = ''.join(random.choices('0123456789', k=11))
             establishment_date = fake.date_between(
                 start_date='-30y', end_date='today')
