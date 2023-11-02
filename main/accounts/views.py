@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import LimitedLiabilityCompany, Shareholder
-from .forms import LimitedLiabilityCompanyForm, ShareholderFormSet, CompanyEditForm
+from .forms import LimitedLiabilityCompanyForm, ShareholderFormSet, CompanyEditForm, ShareholderFormSetEdit
 from django.shortcuts import render, redirect
 
 
@@ -57,7 +57,7 @@ def edit_company(request, company_id):
         form = CompanyEditForm(request.POST, instance=company)
 
         # Create an instance of ShareholderFormSet with the POST data
-        formset = ShareholderFormSet(
+        formset = ShareholderFormSetEdit(
             request.POST, instance=company)
         
         if form.is_valid() and formset.is_valid():
@@ -84,7 +84,7 @@ def edit_company(request, company_id):
                     'total_capital_size', 'The sum of the share counts must be equal to the total capital size.')
     else:
         form = CompanyEditForm(instance=company)
-        formset = ShareholderFormSet(instance=company)  # Change this line
+        formset = ShareholderFormSetEdit(instance=company)  # Change this line
 
-    return render(request, 'pages/increase_capital.html', {'form': form, 'formset': formset, 'company': company})
+    return render(request, 'pages/edit_company.html', {'form': form, 'formset': formset, 'company': company})
 

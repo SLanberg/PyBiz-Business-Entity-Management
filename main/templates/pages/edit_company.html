@@ -59,22 +59,29 @@
       {{ formset.management_form }}
 
       {% for form in formset.forms %}
-      {% for field in form %}
-            {% if field.field.widget.input_type != 'hidden' %}
 
-                <div id="spacer"></div>
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.errors %}
-                  <div class="error-message">
-                    <span class="error-text">{{ field.errors }}</span>
-                  </div>
-                {% endif %}
-    
-                {% else %}
-                {{ field }}
-            {% endif %}
+      {% for field in form %}
+      {% if field.field.widget.input_type != 'hidden' %}
+
+      {{ field.label_tag }}
+      {{ field }}
+      {% if field.errors %}
+      <div class="error-message">
+        <span class="error-text">{{ field.errors }}</span>
+      </div>
+      {% endif %}
+
+      {% else %}
+      {{ field }}
+      {% endif %}
       {% endfor %}
+
+      <!-- TODO: Find a way to handle it better -->
+      {% if form.non_field_errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.non_field_errors }}</span>
+      </div>
+      {% endif %}
       <hr>
       {% endfor %}
     </table>

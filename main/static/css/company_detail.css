@@ -43,7 +43,7 @@ label {
     background-color: var(--error-background-color);
     border: 1px solid var(--error-text-color);
     margin-top: -2px;
-    border-radius: 0 0 5px 5px;
+    border-radius: 5px;
 }
 
 .error-text {

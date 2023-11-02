@@ -11,11 +11,11 @@ class ShareholderForm(forms.ModelForm):
 
 
 class ShareholderFormEdit(forms.ModelForm):
-    # is_founder = forms.BooleanField()
+    is_founder = forms.NullBooleanField(initial=False, required=False, widget=forms.HiddenInput)
 
     class Meta:
         model = Shareholder
-        fields = ['natural_person', 'legal_entity', 'share_count',]
+        fields = ['natural_person', 'legal_entity', 'share_count', 'is_founder']
 
 
 ShareholderFormSet = inlineformset_factory(
