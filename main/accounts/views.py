@@ -64,8 +64,11 @@ def edit_company(request, company_id):
             total_capital_size = form.cleaned_data.get('total_capital_size')
 
             # Calculate the sum of share_count for all shareholders in the formset
-            share_count_sum = sum(shareholder_form.cleaned_data.get(
-                'share_count', 0) for shareholder_form in formset)
+            share_count_sum = sum(
+                shareholder_form.cleaned_data.get('share_count', 0)
+                for shareholder_form in formset
+                if not shareholder_form.cleaned_data.get('DELETE', False)  # Exclude checked checkboxes
+            )
             
             if share_count_sum == total_capital_size:
             
