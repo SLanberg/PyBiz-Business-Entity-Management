@@ -6,6 +6,16 @@ body {
     background-color: black;
 }
 
+label {
+    margin-top: 10px;
+    font-weight: bold;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
 .wide-input {
     width: 300px;
     padding: 10px;

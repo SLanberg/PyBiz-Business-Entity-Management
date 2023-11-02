@@ -37,18 +37,12 @@
     
 }
 
-/* Styles for images within #logo-section */
 #logo-section img {
     margin: 6px 12px 6px 12px;
 }
 
-/* Styles for images within #options-section */
 #options-section img {
     margin-left: 20px;
-}
-
-a {
-    text-decoration: none;
 }
 
 .nav-link {
