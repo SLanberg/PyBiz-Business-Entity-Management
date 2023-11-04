@@ -21,6 +21,12 @@ select {
     box-sizing: border-box;
 }
 
+button {
+    display: block;
+    margin: 20px 0 20px 0;
+}
+
 .hidden {
     display: none;
 }
+

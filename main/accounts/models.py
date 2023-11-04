@@ -2,7 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from .validators import establishment_date_validator, validate_id_code_length, validate_share_count, validate_llc_id_code_length
-# from django.db.models import Q
 
 
 class NaturalPerson(models.Model):

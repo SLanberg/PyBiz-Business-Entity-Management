@@ -4,7 +4,6 @@ from .forms import LimitedLiabilityCompanyForm, ShareholderFormSet, CompanyEditF
 from django.shortcuts import render, redirect
 
 
-
 def company_detail(request, company_id):
     company = get_object_or_404(LimitedLiabilityCompany, pk=company_id)
     shareholders = Shareholder.objects.filter(company=company)
@@ -61,7 +60,7 @@ def edit_company(request, company_id):
         # Create an instance of ShareholderFormSet with the POST data
         formset = ShareholderFormSetEdit(
             request.POST, instance=company)
-        
+
         if form.is_valid() and formset.is_valid():
             total_capital_size = form.cleaned_data.get('total_capital_size')
 
@@ -69,11 +68,12 @@ def edit_company(request, company_id):
             share_count_sum = sum(
                 shareholder_form.cleaned_data.get('share_count', 0)
                 for shareholder_form in formset
-                if not shareholder_form.cleaned_data.get('DELETE', False)  # Exclude checked checkboxes
+                # Exclude checked checkboxes
+                if not shareholder_form.cleaned_data.get('DELETE', False)
             )
-            
+
             if share_count_sum == total_capital_size:
-            
+
                 print(total_capital_size, share_count_sum)
 
                 form.save()
@@ -94,4 +94,3 @@ def edit_company(request, company_id):
     page_title = f'Edit Company {company.name}'
 
     return render(request, 'pages/company_form.html', {'form': form, 'formset': formset, 'company': company, 'page_title': page_title})
-
