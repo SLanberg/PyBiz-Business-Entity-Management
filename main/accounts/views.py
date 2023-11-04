@@ -47,7 +47,9 @@ def create_limited_liability_company(request):
         form = LimitedLiabilityCompanyForm()
         formset = ShareholderFormSet(instance=LimitedLiabilityCompany())
 
-    return render(request, 'pages/establish_company.html', {'form': form, 'formset': formset})
+    page_title = 'Establish Company'
+
+    return render(request, 'pages/company_form.html', {'form': form, 'formset': formset, 'page_title': page_title})
 
 
 def edit_company(request, company_id):
@@ -89,5 +91,7 @@ def edit_company(request, company_id):
         form = CompanyEditForm(instance=company)
         formset = ShareholderFormSetEdit(instance=company)  # Change this line
 
-    return render(request, 'pages/edit_company.html', {'form': form, 'formset': formset, 'company': company})
+    page_title = f'Edit Company {company.name}'
+
+    return render(request, 'pages/company_form.html', {'form': form, 'formset': formset, 'company': company, 'page_title': page_title})
 

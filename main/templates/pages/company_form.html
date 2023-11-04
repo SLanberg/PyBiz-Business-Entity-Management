@@ -1,25 +1,17 @@
 {% extends "base_templates/base.html" %}
 {% load static %}
 
-{% block title %}Edit {{ company.name }} - Limited Liability Company{% endblock %}
+{% block title %}{{ page_title }}{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/edit_company.css' %}">
-<script src="{% static 'js/edit-company.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/form_company.css' %}">
+<script src="{% static 'js/dynamic-form.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-
-<style>
-  .hidden {
-    display: none;
-  }
-</style>
-
 <div id="section">
-  <h1>Edit Company {{ company.name }}</h1>
-
   <form method="post">
     {% csrf_token %}
     <!-- Display LimitedLiabilityCompany fields -->
