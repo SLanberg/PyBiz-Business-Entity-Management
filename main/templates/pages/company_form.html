@@ -22,7 +22,7 @@
       {{ form.name }}
       {% if form.name.errors %}
       <div class="error-message">
-        <span class="error-text">{{ form.natural_person.errors }}</span>
+        <span class="error-text">{{ form.name.errors }}</span>
       </div>
       {% endif %}
 
@@ -59,7 +59,7 @@
     <div id="shareholder-form-list">
       {% for form in formset.forms %}
 
-      <div class="shareholder-form">
+      <div id="form" class="shareholder-form">
 
         {% for field in form %}
 
@@ -84,6 +84,7 @@
           <span class="error-text">{{ form.non_field_errors }}</span>
         </div>
         {% endif %}
+
         <hr>
       </div>
       {% endfor %}
