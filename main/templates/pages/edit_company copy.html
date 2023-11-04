@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block content %}
-
 <div id="section">
   <h1>Edit Company {{ company.name }}</h1>
 
@@ -53,15 +52,13 @@
     <!-- Display Shareholder formset -->
     <h2>Shareholders:</h2>
 
+    <table>
       {{ formset.management_form }}
 
       <div id="shareholder-form-list">
         {% for form in formset.forms %}
-
         <div class="shareholder-form">
-
           {% for field in form %}
-
           {% if field.field.widget.input_type != 'hidden' %}
 
           {{ field.label_tag }}
@@ -75,32 +72,33 @@
           {% else %}
           {{ field }}
           {% endif %}
-
-        {% endfor %}  
-
+          {% endfor %}
         </div>
-
-
-      {% endfor %}
       </div>
 
-      <div id="empty-form" class="hidden">
-        {{ formset.empty_form.as_table }}
+
+
+      <!-- TODO: Find a way to handle it better -->
+      <!-- {% if form.non_field_errors %}
+      <div class="error-message">
+        <span class="error-text">{{ form.non_field_errors }}</span>
+      </div>
+      {% endif %}
+      <hr>
+      {% endfor %} -->
+
+
+
+      <div id="empty-form" style="display: none;">
+        {{ formset.empty_form }}
       </div>
 
-      <button id="add-more" type="button">Add More Shareholders</button>
+      <button id="add-more" type="button">add more</button>
 
+    </table>
 
     <button type="submit">Save</button>
   </form>
 </div>
-
-<style>
-  .hidden {
-    display: none;
-  }
-</style>
-
-
 {% endblock %}
 
