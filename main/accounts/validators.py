@@ -11,6 +11,11 @@ def validate_integer(value):
 def validate_id_code_length(value):
     if len(value) != 11:
         raise ValidationError("Must have exactly 11 numbers")
+    
+
+def validate_llc_id_code_length(value):
+    if len(value) != 7:
+        raise ValidationError("Must have exactly 7 numbers")
 
 def establishment_date_validator(value):
     if value > timezone.now().date():

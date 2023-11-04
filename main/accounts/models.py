@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
-from .validators import establishment_date_validator, validate_id_code_length, validate_share_count
+from .validators import establishment_date_validator, validate_id_code_length, validate_share_count, validate_llc_id_code_length
 # from django.db.models import Q
 
 
@@ -24,7 +24,7 @@ class LegalEntity(models.Model):
 
 class LimitedLiabilityCompany(models.Model):
     name = models.CharField(max_length=100)
-    registration_code = models.CharField(max_length=11, validators=[validate_id_code_length], unique=True)
+    registration_code = models.CharField(max_length=7, validators=[validate_llc_id_code_length], unique=True)
     total_capital_size = models.DecimalField(decimal_places=2, max_digits=30, validators=[MinValueValidator(2500)])
     establishment_date = models.DateField(null=False, validators=[establishment_date_validator])
     
