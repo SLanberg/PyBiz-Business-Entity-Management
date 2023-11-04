@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
-from .validators import establishment_date_validator, validate_id_code_length, validate_share_count, validate_llc_id_code_length
+from .validators import establishment_date_validator, validate_id_code_length, validate_share_count, validate_legal_entity_id_code_length, validate_legal_entity_name_length
 
 
 class NaturalPerson(models.Model):
@@ -15,15 +15,15 @@ class NaturalPerson(models.Model):
 
 class LegalEntity(models.Model):
     name = models.CharField(max_length=100)
-    registration_code = models.CharField(max_length=7, unique=True, validators=[validate_llc_id_code_length])
+    registration_code = models.CharField(max_length=7, unique=True, validators=[validate_legal_entity_id_code_length])
 
     def __str__(self):
         return self.name + " | " + self.registration_code
 
 
 class LimitedLiabilityCompany(models.Model):
-    name = models.CharField(max_length=100)
-    registration_code = models.CharField(max_length=7, validators=[validate_llc_id_code_length], unique=True)
+    name = models.CharField(max_length=100, validators=[validate_legal_entity_name_length])
+    registration_code = models.CharField(max_length=7, validators=[validate_legal_entity_id_code_length], unique=True)
     total_capital_size = models.DecimalField(decimal_places=2, max_digits=30, validators=[MinValueValidator(2500)])
     establishment_date = models.DateField(null=False, validators=[establishment_date_validator])
     

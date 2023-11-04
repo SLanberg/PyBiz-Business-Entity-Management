@@ -55,7 +55,7 @@ class FormTests(TestCase):
     def test_LimitedLiabilityCompanyForm_name_invalid(self):
         # Create invalid data for LimitedLiabilityCompanyForm
         data = {
-            'name': '',
+            'name': 'ab',
             'registration_code': '1234567',
             'establishment_date': '2000-01-01',
             'total_capital_size': 100000,
