@@ -56,6 +56,13 @@
         <div id="shareholder-forms" data-prefix="{{ formset.prefix }}">
             <h2>Shareholders:</h2>
 
+
+            <!-- Empty shareholder form template -->
+            <!-- This is important part to build more dynamic forms related to the Shareholders -->
+            <div id="empty-form" style="display: none;">
+                {{ formset.empty_form.as_table }}
+            </div>
+
             {% for form in formset.forms %}
 
             <div class="form-container">
@@ -102,10 +109,5 @@
         <button style="margin:20px 0 20px 0; display: block;" type="submit">Submit</button>
     </form>
 
-    <!-- Empty shareholder form template -->
-    <!-- This is important part to build more dynamic forms related to the Shareholders -->
-    <div id="empty-form" style="display: none;">
-        {{ formset.empty_form.as_table }}
-    </div>
 </div>
 {% endblock %}

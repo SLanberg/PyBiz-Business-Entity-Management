@@ -10,6 +10,13 @@
 
 {% block content %}
 
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
+
 <div id="section">
   <h1>Edit Company {{ company.name }}</h1>
 
@@ -53,54 +60,50 @@
     <!-- Display Shareholder formset -->
     <h2>Shareholders:</h2>
 
-      {{ formset.management_form }}
+    {{ formset.management_form }}
 
-      <div id="shareholder-form-list">
-        {% for form in formset.forms %}
+    <div id="shareholder-form-list">
+      {% for form in formset.forms %}
 
-        <div class="shareholder-form">
+      <div class="shareholder-form">
 
-          {% for field in form %}
+        {% for field in form %}
 
-          {% if field.field.widget.input_type != 'hidden' %}
+        {% if field.field.widget.input_type != 'hidden' %}
 
-          {{ field.label_tag }}
-          {{ field }}
-          {% if field.errors %}
-          <div class="error-message">
-            <span class="error-text">{{ field.errors }}</span>
-          </div>
-          {% endif %}
-
-          {% else %}
-          {{ field }}
-          {% endif %}
-
-        {% endfor %}  
-
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+        <div class="error-message">
+          <span class="error-text">{{ field.errors }}</span>
         </div>
+        {% endif %}
 
+        {% else %}
+        {{ field }}
+        {% endif %}
 
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+        <div class="error-message">
+          <span class="error-text">{{ form.non_field_errors }}</span>
+        </div>
+        {% endif %}
+        <hr>
+      </div>
       {% endfor %}
-      </div>
+    </div>
 
-      <div id="empty-form" class="hidden">
-        {{ formset.empty_form.as_table }}
-      </div>
+    <div id="empty-form" class="hidden">
+      {{ formset.empty_form.as_table }}
+      <button style="margin: 10px 0 10px 0;" type="button" class="remove-form-button">Remove</button>
+    </div>
 
-      <button id="add-more" type="button">Add More Shareholders</button>
+    <button id="add-more" type="button">Add More Shareholders</button>
 
 
     <button type="submit">Save</button>
   </form>
 </div>
-
-<style>
-  .hidden {
-    display: none;
-  }
-</style>
-
-
 {% endblock %}
-

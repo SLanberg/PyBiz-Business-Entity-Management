@@ -32,7 +32,7 @@ ShareholderFormSetEdit = inlineformset_factory(
     LimitedLiabilityCompany,  # Parent model
     Shareholder,              # Child model
     form=ShareholderFormEdit,
-    extra=1,                  # Number of empty forms to display
+    extra=0,                  # Number of empty forms to display
     can_delete=True,
     can_delete_extra=False
 )

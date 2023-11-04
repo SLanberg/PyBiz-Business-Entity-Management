@@ -36,33 +36,5 @@ $(document).ready(function () {
   });
   
 
-//   function toggleShareholderFields() {
-//     var entitySelect = $("#id_shareholder_set-0-entity_type");
-//     var founderStatus = entitySelect.val();
-//     var naturalFields = $("#id_shareholder_set-0-natural_person, label[for='id_shareholder_set-0-natural_person']");
-//     var legalEntityFields = $("#id_shareholder_set-0-legal_entity, label[for='id_shareholder_set-0-legal_entity']");
-
-//     if (founderStatus === "natural_person") {
-//         naturalFields.css("display", "block");
-//         legalEntityFields.css("display", "none");
-//         // Clear the values of the legal entity fields
-//         $("#id_shareholder_set-0-legal_entity").val("");
-//     } else {
-//         naturalFields.css("display", "none");
-//         legalEntityFields.css("display", "block");
-//         // Clear the values of the natural person fields
-//         $("#id_shareholder_set-0-natural_person").val("");
-//     }
-// }
-
-// // Initial state on page load
-// toggleShareholderFields();
-
-// // Listen for changes in founder status dropdown
-// $("#id_shareholder_set-0-entity_type").on("change", function () {
-//     toggleShareholderFields();
-// });
-
-
   
 });
