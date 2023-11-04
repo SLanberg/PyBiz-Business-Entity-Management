@@ -38,11 +38,13 @@ class CompanyListViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Check that the view paginates the results correctly
-        self.assertEqual(len(response.context['companies']), 2)  # Assuming per_page is set to 10
+        # Assuming per_page is set to 10
+        self.assertEqual(len(response.context['companies']), 2)
 
     def test_company_list_view_no_search_results(self):
         # Perform a GET request to the company_list view with a search query that should return no results
-        response = self.client.get(reverse('company_list'), {'q': 'Non-Existent Company'})
+        response = self.client.get(reverse('company_list'), {
+                                   'q': 'Non-Existent Company'})
 
         # Check that the response status code is 200 (OK)
         self.assertEqual(response.status_code, 200)

@@ -49,5 +49,9 @@ class Shareholder(models.Model):
         self.clean()  # Call the clean method to perform validation
         super(Shareholder, self).save(*args, **kwargs)
 
-        def __str__(self):
-            return self.natural_person + " | " + self.legal_entity
+    def __str__(self):
+        if self.natural_person:
+            return self.natural_person.first_name + " " + self.natural_person.last_name
+        elif self.legal_entity:
+            return self.legal_entity.name
+
