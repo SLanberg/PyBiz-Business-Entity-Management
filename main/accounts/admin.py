@@ -64,7 +64,7 @@ class LegalEntityAdmin(admin.ModelAdmin):
 
 
 class ShareholderAdmin(admin.ModelAdmin):
-    list_display = ('natural_person', 'display_company_info',
+    list_display = ('display_company_info', 'natural_person',
                     'legal_entity', 'share_count', 'is_founder')
 
     def display_company_info(self, obj):
