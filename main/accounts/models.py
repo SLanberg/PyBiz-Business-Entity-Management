@@ -15,7 +15,7 @@ class NaturalPerson(models.Model):
 
 class LegalEntity(models.Model):
     name = models.CharField(max_length=100)
-    registration_code = models.CharField(max_length=11, unique=True, validators=[validate_id_code_length])
+    registration_code = models.CharField(max_length=7, unique=True, validators=[validate_llc_id_code_length])
 
     def __str__(self):
         return self.name + " | " + self.registration_code

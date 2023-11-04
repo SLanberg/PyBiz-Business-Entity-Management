@@ -5,7 +5,7 @@ import random
 
 
 class Command(BaseCommand):
-    help = 'Populate LegalEntity and create admin user'
+    help = 'Populate LegalEntity, NaturalPerson, Shareholder, LimitedLiabilityCompany.'
 
     def handle(self, *args, **options):
         fake = Faker()
@@ -14,7 +14,7 @@ class Command(BaseCommand):
         legal_entities = []
         for _ in range(5):  # Adjust the number of entities as needed
             name = fake.company()
-            registration_code = ''.join(random.choices('0123456789', k=11))
+            registration_code = ''.join(random.choices('0123456789', k=7))
             legal_entity = LegalEntity.objects.create(
                 name=name, registration_code=registration_code)
             legal_entities.append(legal_entity)
@@ -29,10 +29,9 @@ class Command(BaseCommand):
                 first_name=first_name, last_name=last_name, id_code=id_code)
             natural_persons.append(natural_person)
 
-
         for _ in range(20):  # Adjust the number of companies as needed
             company_name = fake.company()
-            registration_code = ''.join(random.choices('0123456789', k=11))
+            registration_code = ''.join(random.choices('0123456789', k=7))
             establishment_date = fake.date_between(
                 start_date='-30y', end_date='today')
             total_capital_size = 6000
@@ -70,7 +69,7 @@ class Command(BaseCommand):
                     )
 
         self.stdout.write(self.style.SUCCESS(
-            'Successfully populated LegalEntity and shareholders.'))
+            'Successfully populated LegalEntity, NaturalPerson, Shareholder, LimitedLiabilityCompany. 🚀'))
 
 # Create admin user
 # User.objects.create_superuser('admin', 'admin@example.com', 'admin')
